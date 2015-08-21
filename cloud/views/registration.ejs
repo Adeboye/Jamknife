@@ -1,0 +1,26 @@
+<!doctype html>
+<head>
+	  <meta charset="utf-8">
+
+	  <title><%= title %></title>
+	  <meta name="description" content="My Parse App">
+	  <meta name="viewport" content="width=device-width">
+	  <!-- <link rel="stylesheet" href="/css/reset.css">
+	  <link rel="stylesheet" href="/css/styles.css"> -->
+	  <link rel="stylesheet" type="text/css" href="/css/reg_style.css">
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	  <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+	  <script src="https://fb.me/react-0.13.3.js"></script>
+	  <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+	  <script src="/javascripts/signup.jsx" type="text/jsx"></script>
+      <script type="text/javascript">
+		Parse.initialize("<%=parseApplicationId%>", "<%=parseJavascriptkey%>");
+	  </script>
+</head>
+<body>
+	<script type="text/jsx">
+		var signup_page = React.createElement(signup);
+		React.render(signup_page, document.body);	
+	</script>
+</body>
+</html>

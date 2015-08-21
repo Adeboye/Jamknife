@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    <script type="text/javascript" src="/javascripts/cookiereader.js"></script>
+    <script type="text/javascript">
+		Parse.initialize("<%=parseApplicationId%>", "<%=parseJavascriptkey%>");
+    </script>
+    <script type="text/javascript">
+    	var cookie = window.readCookie("sess_cookie");
+    	var cookie_decode = decodeURIComponent(cookie);
+   
+			Parse.User.become(cookie_decode).then(function (user) {
+          var username = user.get('username');
+          window.location.href = "/" + username; 
+				},
+					function (error) {
+					 console.log(error);
+			});
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

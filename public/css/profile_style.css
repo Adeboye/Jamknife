@@ -1,0 +1,528 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+body{
+	background: #fff;
+	font-family: Open Sans, helvetica, Arial;
+	margin-right:0px;
+	padding: 0px;
+	-webkit-font-smoothing: antialiased
+}
+
+/* Header section begins*/
+
+#header{
+	position: fixed;
+	text-align: center;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	border-bottom: 1px solid rgba(0,0,0,.02);
+	background-color: #f4f2f1;
+	z-index: 1000;
+}
+
+#navigation{
+	position: relative;
+	display: inline-block;
+	top: 1px;
+	width: 750px;
+	height: 100%;
+}
+
+
+#user_nav{
+	position: absolute;
+	display: inline-block;
+	padding: 0px 25px 0px 20px;
+	top: -1px;
+	left: 180px;
+	text-align: center;
+	height: 53px;
+	width: auto;
+}
+
+#user_nav .avatar {
+	top: 13px;
+	position: relative;
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	border-radius: 100%;
+	border: 1px solid rgba(0,0,0,.07)
+}
+
+#user_nav .username{
+	padding: 0px;
+	top: 0px;
+	left: 5px;
+	position: relative;
+	display: inline-block;
+	font-size: 11px;
+	font-weight: 400;
+	letter-spacing: 1px;
+	color:rgba(0,0,0,.7);
+	text-transform: uppercase;
+}
+
+#font_logo{
+	position: absolute;
+	font-size: 13px;
+	top: -12px;
+	letter-spacing: 1px;
+	padding: 5px;
+	color: rgba(0,0,0,.5);
+	border:1px solid rgba(255,255,255,.05);
+	width: 100px;
+}
+
+.post_button{
+	position: absolute;
+	padding: 21px 18px 20px 18px ; 
+	top: -12px;
+	right: 95px;
+	letter-spacing: 1px;
+	font-size: 10px;
+	font-weight: 600;
+	color: rgba(0,0,0,.7);
+}
+
+.post_button:after {
+	content: '';
+	display: block;
+	margin:4px auto;
+	height: 2px;
+	width: 0px;
+	background: transparent;
+	transition: width .3s ease, background-color .3s ease;
+	-ms-transition: width .3s ease, background-color .3s ease;
+	 -moz-transition: width .3s ease, background-color .3s ease; 
+}
+
+.post_button:hover:after {
+	width: 100%;
+	background: rgba(0,0,0,.4);
+}
+
+.log_button{
+	position: absolute;
+	padding: 21px 18px 18px 22px ; 
+	top: -12px;
+	right: 0px;
+	letter-spacing: 1px;
+	font-size: 10px;
+	font-weight: 600;
+	color: rgba(0,0,0,.7);
+}
+
+.log_button:after {
+	content: '';
+	display: block;
+	margin:4px auto;
+	height: 2px;
+	width: 0px;
+	background: transparent;
+	transition: width .2s ease, background-color .2s ease;
+	-ms-transition: width .2s ease, background-color .2s ease;
+	 -moz-transition: width .2s ease, background-color .2s ease; 
+}
+
+.log_button:hover:after {
+	width: 100%;
+	background: rgba(0,0,0,.4);
+}
+
+
+
+/*Profile Section Begins-------------------------------------------------------------------
+----------------------------------------------------------*/
+
+#profile_section{
+	position: fixed;
+	text-align: center;
+	top:50px;
+	left: 0px;
+	width: 300px;
+	height: 100%;
+	border-right: 1px solid rgba(0,0,0,.08);
+	z-index: 900;
+	background-color: #fff;
+}
+
+#edit_profile_wrapper{
+	width: 300px;
+	height: 49px;
+	top: 1px;
+}
+
+#edit_profile{
+	position: relative;
+	text-align: left;
+	padding-top: 18px;
+	padding-bottom: 17px;
+	padding-left: 30px;
+	margin: 0px;
+	opacity: .8;
+	font-size: 10px;
+	font-weight: 600;
+}
+
+#avatar_container{
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#profile_section .avatar{
+	position: relative;
+	margin: 0px;
+	height: 140px;
+	width: 140px;
+	border-radius:100%;
+	border: 1px solid rgba(0,0,0,.09)
+}
+
+.username{
+	position: relative;
+	font-size: 16px;
+	padding-left: 20px;
+    padding-right: 20px;
+    font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	opacity: 0.8;
+	margin: 0px;
+	word-wrap: break-word;
+}
+
+.full_name{
+	position: relative;
+	/*text-transform: uppercase;*/
+	padding-left: 20px;
+    padding-right: 20px;
+	font-size: 13px;
+	font-weight: 400;
+	opacity: 0.8;
+	margin: 0px;
+	word-wrap: break-word;
+}
+
+.bio{
+	position: relative;
+	font-size: 13px;
+	opacity: 0.8;
+	padding-left: 20px;
+    padding-right: 20px;
+	line-height: 1.3em;
+	margin: 0px;
+	word-wrap: break-word;
+}
+
+.website{
+	position: relative;
+	font-family: helvetica;
+	font-size:13px;
+	padding-left: 20px;
+    padding-right: 20px;
+	text-decoration: none;
+	color: #1783ff;
+	margin: 0px;
+	word-wrap: break-word;
+}
+
+#counters{
+	position: relative;
+	margin: 0px;
+	width: 100%;
+	height:auto;
+	text-align: center;
+}
+
+#views{
+	display: inline-block;
+	height: auto;
+	vertical-align: top;
+	text-align: center;
+	width:110px;
+}
+
+#views_label{
+	position: relative;
+	padding: 0px;
+	margin: 0px;
+	font-size: 11px;
+	font-weight: 400;
+	letter-spacing: 3px;
+	opacity: 0.7;
+	margin: 0px;
+	padding: 0px;
+}
+
+.no_of_views{
+	top: 0px;
+	font-size: 20px;
+	font-weight: 400;
+	margin: 0px;
+	padding:0px;
+	opacity: .7;
+
+}
+
+#crate_label{
+	position: relative;
+	padding: none;
+	font-size: 11px;
+	font-weight: 400;
+	letter-spacing: 3px;
+	opacity: 0.7;
+	padding: 0px;
+	margin: 0px;
+}
+
+#crate{
+	display: inline-block;
+	text-align: center;
+	width:110px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.no_of_songs{
+	top: 0px;
+	font-size: 20px;
+	font-weight: 400;
+	padding: 0px;
+	margin: 0px;
+	opacity: .7;
+}
+
+#counter_divider{
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	top:11px;
+	padding: 0px;
+}
+
+#fav_song{
+	position: relative;
+	display: inline-block;
+	border:1px dashed green;
+	top: 0px;
+	height: 220px;
+	width: 220px;
+}
+
+#featured_label{
+	position: relative;
+	text-align: left;
+	padding-top: 18px;
+	padding-bottom: 17px;
+	border: 1px dashed red; 
+	padding-left: 30px;
+	margin: 0px;
+	opacity: .8;
+	font-size: 10px;
+	font-weight: 600;
+}
+
+.featured_thumb{
+	position: relative;
+	height: 220px;
+	width: 220px;
+	z-index: 1000;
+}
+
+
+/*Second Header -------------------------------------------------------------------
+----------------------------------------------------------*/
+
+#second_header{
+	position: fixed;
+	top: 50px;
+	left: 300px;
+	width: 100%;
+	border-bottom:1px solid rgba(0,0,0,.05);
+	height: 49px;
+	background-color: #fff;
+	z-index: 800;
+}
+
+#second_header_label{
+	display: inline-block;
+	position: relative;
+	top: 0px;
+	left: 40px;
+	font-size: 16px;
+	color: rgba(0,0,0,0.4);
+}
+
+.edit_crate_button{
+	display: inline-block;
+	position: relative;
+	top: -3px;
+	left: 450px;
+	letter-spacing: 1px;
+	font-size: 10px;
+	font-weight: 600;
+	padding: 5px 9px 5px 9px;
+	border:1px solid rgba(0,0,0,.05);
+	border-radius: 25px;
+	color: rgba(0,0,0,.5);
+	background-color: #f4f2f1;
+}
+
+#container{
+	position:relative;
+	padding-left: 310px;
+	top: 100px;
+	width: auto;
+	height: auto;
+
+}
+
+.fa-star{
+	position: absolute;
+	top: 2px;
+	left: 330px;
+	opacity: .6;
+}
+
+.fa-cogs{
+	position: absolute;
+	top: 16px;
+	left: 10px;
+	opacity: .7;
+}
+
+.fa-circle-o{
+	position: absolute;
+	top: 247px;
+	left: 330px;
+	opacity: .4;
+}
+
+.fav_label{
+	letter-spacing: 1px;
+	position: relative;
+	width: 200px;
+	top: 4px;
+	left: 40px;
+	opacity: .8;
+	font-size: 10px;
+	font-weight: 600;
+	color: rgba(0,0,0,.9);
+}
+
+.favorites{
+	position: relative;
+	padding-left:0px;
+	padding-top:6px;
+	margin-bottom: 12px;
+	height: 205px;
+	border-bottom: 1px solid rgba(0,0,0,.08);
+	list-style-type: none;
+	overflow-y: hidden;
+	overflow-x: scroll;
+	-webkit-overflow-scrolling: touch;
+	border-bottom: 1px solid rgba(0,0,0,.08);
+	white-space: nowrap;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top: 0px;
+}
+
+.post{
+	position: relative;
+	display: inline-table;
+	left: 0px;
+	top: 0px;
+	padding:0px 0px 0px 0px;
+	margin-right: 20px;
+	margin-bottom:10px; 
+	width:140px;
+	height: 120px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.fa-trash{
+	position: absolute;
+	display: inline-block;
+	right: -6px;
+	top: -6px;
+	color: #c41116;
+}
+
+.thumbnail{
+	height: 140px;
+	width: 140px;
+	border:1px solid rgba(0,0,0,.2);
+}
+
+.thumb_overlay{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 140px;
+	width: 140px;
+	opacity: 0;
+}
+
+.thumb_overlay:hover {
+	opacity:.9;
+}
+
+.song_title{
+	position: relative;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 1.3em;
+	overflow: hidden;
+	max-height: 33px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+  	-webkit-line-clamp: 2;
+  	-webkit-box-orient: vertical;
+   	margin:0px;
+  	padding: 0px;
+  	white-space: normal;
+}
+
+.artist_name{
+	position: relative;
+	font-size: 12px;
+	font-weight: 400;
+	opacity: 0.5;
+	line-height: 1.3em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+  	-webkit-line-clamp: 1;
+  	-webkit-box-orient: vertical;
+   	margin:0px;
+  	padding: 0px;
+  	white-space: normal;
+}
+
+.all_songs{
+	padding-left: 19px;
+	margin:0px;
+	list-style-type: none;
+	padding-right: 0px;
+	overflow: hidden;
+}
+
+.all_songs_label{
+	letter-spacing: 1px;
+	position: relative;
+	width: 100px;
+	left: 40px;
+	opacity: .8;
+	font-size: 10px;
+	font-weight: 600;
+	color: rgba(0,0,0,.9);
+	margin-top: 0px;
+	padding-bottom: 3px;
+}

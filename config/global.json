@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.5.0"
+  },
+  "applications": {
+    "_default": {
+      "link": "jamknife"
+    },
+    "jamknife": {
+      "applicationId": "4gUrVz0JkKbTECvk0KrstijSBFEFgHh6aCApdWRh",
+      "masterKey": "rXLyARiri3pp3lmtOCnk0j1bH1efdAXKW24RYzQ5"
+    }
+  }
+}

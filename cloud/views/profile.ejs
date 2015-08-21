@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><%= title %></title>
+	<link rel="stylesheet" type="text/css" href="/css/profile_style.css">
+	<link rel="stylesheet" type="text/css" href="/css/edit_profile_style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    <script type="text/javascript" src="/javascripts/cookiereader.js"></script>
+    <script type="text/javascript">
+		Parse.initialize("<%=parseApplicationId%>", "<%=parseJavascriptkey%>");
+    </script>
+    <script type="text/javascript">
+    	var cookie = window.readCookie("sess_cookie");
+    	var cookie_decode = decodeURIComponent(cookie);
+    	console.log("here i am");
+    	/*if(!(Parse.User.current()))
+    	{*/
+    		console.log("made it here");
+			Parse.User.become(cookie_decode).then(function (user) {
+					  console.log(user);
+				},
+					function (error) {
+					 console.log(error);
+			});
+	    //}
+    </script>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://www.parsecdn.com/js/parse-react.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script src="/javascripts/profile.jsx" type="text/jsx"></script>
+</head>
+<body>
+<div id="header"></div>
+	<script type="text/jsx">
+	console.log('why wont you work');
+	</script>
+
+<div id="footer">
+</div>
+<!-- <div id="my_second_header">
+				<div id="second_header">
+					<p id="second_header_label">CRATE</p>
+					<h5 class="edit_crate_button">EDIT CRATE</h5>	
+</div>
+<div id="footerb"> -->
+</div>
+</body>
+</html>
