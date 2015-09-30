@@ -6,14 +6,17 @@ console.log("NOTICE ME");
 var user_query;
 
 var curr_user = Parse.User.current();
+//console.log(curr_user.getSessionToken());
+console.log(curr_user);
 
 var bob;
-
 
 /*document.getElementById("logout").addEventListener("click", function(){
     alert("i was clicled");
 	localStorage.clear();
 });*/
+
+Parse.Cloud.run("pageviews", {username: user_info.username});
 
 $(document).on("click", "#logout", function(e) {
 	   localStorage.clear();
@@ -42,8 +45,8 @@ var Navigation = React.createClass({
 			return(
 				    <div id="navigation">
 						<a href={"/" + this.data.user.username}><h5 id="font_logo">JAMKNIFE</h5></a>
-						<p className="post_button">POST SONG</p>
-						<a href="/logout" ><p id="logout" className="log_button">LOG OUT</p></a>
+						<button className="post_button" type="button">Add a new song</button>
+						<a href="/signup" ><p id="logout" className="log_button">LOG OUT</p></a>
 						<div id="user_nav">
 							<img className="avatar" src={this.data.user.photo? this.data.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"}/>
 							<p className="username">{this.data.user.username}</p>
@@ -56,7 +59,7 @@ var Navigation = React.createClass({
     		return(
 			    <div id="navigation">
 					<a href="/"><h5 id="font_logo">JAMKNIFE</h5></a>
-					<a href="/" ><p id="signup" className="log_button">SIGN UP</p></a>
+					<a href="/signup" ><p id="signup" className="log_button">SIGN UP</p></a>
 			    </div>
 		    )
 	    }	
@@ -88,34 +91,31 @@ var Profile_section = React.createClass({
 			{	
 				return(
 					<div id="profile_section">
-						<div id="edit_profile_wrapper">
-							<button id="button" name="button">
-							<i className="fa fa-cogs"></i>
-							<p id="edit_profile">EDIT PROFILE</p>
-							</button>
-						</div>
-						<div id="avatar_container">
-							<img className="avatar" src={this.data.user.photo? this.data.user.photo.url() : "/public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';"/>
-						</div>
-						<h className="username">{this.data.user.username}</h>
-						<h2 className="full_name">{this.data.user.fullname}</h2>
-						<p className="bio">{this.data.user.bio}</p>
-						<a className="website" href="www.colouredconversations.com">{this.data.user.website}</a>
-						<div id="counters">
-							<div id="crate">
-								<p className="no_of_songs">250</p>
-								<p id="crate_label">CRATE</p>
+						<button id="edit_profile" type="button">
+						 	<i id="cog" className="fa fa-cogs"></i>
+						 	<p>EDIT PROFILE</p>
+			 			</button>
+			 			<div id="avatar_container">
+							<img className="avatar" src={this.data.user.photo? this.data.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';"/>
+						</div> 
+						<div id="profile_container">
+							<h className="username">{this.data.user.username}</h>
+							<h2 className="full_name">{this.data.user.fullname}</h2>
+							<p className="bio">{this.data.user.bio}</p>
+							<a className="website" href={"http://" +this.data.user.website}>{this.data.user.website}</a>
+							<div id="counters">
+								<div id="views">
+									<i id="eye"className="fa fa-eye"></i>
+									<p id="views_label">VIEWS:</p>
+									<p className="no_of_views">{this.data.user.pageview}</p>
+								</div>
+								<div id="crate">
+									<i id="box"className="fa fa-music"></i>
+									<p id="crate_label">CRATE:</p>
+									<p className="no_of_songs">415</p>
+								</div>
 							</div>
-							<img id= "counter_divider" src="public_folder/images/counter_div.png"/>
-							<div id="views">
-								<p className="no_of_views">800</p>
-								<p id="views_label">VIEWS</p>
-							</div>
 						</div>
-						<p id="featured_label">FEATURED SONG</p>
-						<div id="fav_song">
-						</div>
-						<div id="profile_footer"></div>		
 			    	</div>
 				)
 			}
@@ -126,25 +126,24 @@ var Profile_section = React.createClass({
 						<div id="avatar_container">
 							<img className="avatar" src={user_info.photo? user_info.photo.url : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';"/>
 						</div>
-						<h className="username">{user_info.username}</h>
-						<h2 className="full_name">{user_info.fullname}</h2>
-						<p className="bio">{user_info.bio}</p>
-						<a className="website" href="www.colouredconversations.com">{user_info.website}</a>
-						<div id="counters">
-							<div id="crate">
-								<p className="no_of_songs">250</p>
-								<p id="crate_label">CRATE</p>
+						<div id="profile_container">
+							<h className="username">{user_info.username}</h>
+							<h2 className="full_name">{user_info.fullname}</h2>
+							<p className="bio">{user_info.bio}</p>
+							<a className="website" href={"http://" + user_info.website}>{user_info.website}</a>
+							<div id="counters">
+								<div id="views">
+									<i id="eye"className="fa fa-eye"></i>
+									<p id="views_label">VIEWS:</p>
+									<p className="no_of_views">{user_info.pageview}</p>
+								</div>
+								<div id="crate">
+									<i id="box"className="fa fa-music"></i>
+									<p id="crate_label">CRATE:</p>
+									<p className="no_of_songs">415</p>
+								</div>
 							</div>
-							<img id= "counter_divider" src="public_folder/images/counter_div.png"/>
-							<div id="views">
-								<p className="no_of_views">800</p>
-								<p id="views_label">VIEWS</p>
-							</div>
-						</div>
-						<p id="featured_label">FEATURED SONG</p>
-						<div id="fav_song">
-						</div>
-						<div id="profile_footer"></div>		
+						</div>	
 			    	</div>
 			    )
 			}
@@ -156,26 +155,25 @@ var Profile_section = React.createClass({
 					<div id="avatar_container">
 						<img className="avatar" src={user_info.photo? user_info.photo.url : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';"/>
 					</div>
-					<h className="username">{user_info.username}</h>
-					<h2 className="full_name">{user_info.fullname}</h2>
-					<p className="bio">{user_info.bio}</p>
-					<a className="website" href="www.colouredconversations.com">{user_info.website}</a>
-					<div id="counters">
-						<div id="crate">
-							<p className="no_of_songs">250</p>
-							<p id="crate_label">CRATE</p>
+					<div id="profile_container">
+						<h className="username">{user_info.username}</h>
+						<h2 className="full_name">{user_info.fullname}</h2>
+						<p className="bio">{user_info.bio}</p>
+						<a className="website" href={"http://" + user_info.website}>{user_info.website}</a>
+						<div id="counters">
+							<div id="views">
+								<i id="eye"className="fa fa-eye"></i>
+								<p id="views_label">VIEWS:</p>
+								<p className="no_of_views">{user_info.pageview}</p>
+							</div>
+							<div id="crate">
+								<i id="box"className="fa fa-music"></i>
+								<p id="crate_label">CRATE:</p>
+								<p className="no_of_songs">415</p>
+							</div>
 						</div>
-						<img id= "counter_divider" src="public_folder/images/counter_div.png"/>
-						<div id="views">
-							<p className="no_of_views">800</p>
-							<p id="views_label">VIEWS</p>
-						</div>
-					</div>
-					<p id="featured_label">FEATURED SONG</p>
-					<div id="fav_song">
-					</div>
-					<div id="profile_footer"></div>		
-		    	</div>
+					</div>	
+			    </div>
 			)
 		}
 	}
@@ -183,7 +181,7 @@ var Profile_section = React.createClass({
 
 React.render(
 			<Profile_section />,
-			document.getElementById('footer')
+			document.getElementById('mid-content')
 );
 
 var Edit_profile = React.createClass({
@@ -219,35 +217,34 @@ var Edit_profile = React.createClass({
 	render: function () {
 		return(
 			<div id="profile_section">
-				<div id="edit_profile_wrapper">
-					<p id="edit_profile">EDIT PROFILE</p>
-					<button id="cnc_button"><img id="cancel_button" src="public_folder/images/Edit Profile/cancel.png" /></button>
-				</div>
+				<button id="cnc_button" className="edit_profile" type="button">
+				 	<img id="cancel_button" src="public_folder/images/Edit Profile/cancel.png"/>
+				</button> 
 				<div id="avatar_container">
-					<input type="file" accept="image/*" id="imgupload" onChange={this.handlePhotoUpload} hidden/> 
-					<button id="OpenImgUpload" onClick={this.handlePhotoClick}>
-					<img id="edit_avatar" className="avatar" src={this.data.user.photo? this.data.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';" />
+					<input type="file" accept="image/*" id="imgupload" onChange={this.handlePhotoUpload} hidden/>
+					<button id="OpenImgUpload" onClick={this.handlePhotoClick}> 
 					<div id="avatar_overlay">
 						<i className="fa fa-camera fa-4x"></i>
 					</div>
-					</button>
-				</div>
-				<form id="form" action="">
-					<label id="username_icon"><img src="public_folder/images/Edit Profile/username_label.png" /></label>
-					<input type="text" id="a" name="username" placeholder="demi.adeniyi" maxLength="25" defaultValue={this.data.user.username} />
-					<br/>
-					<label id="name_icon"><img src="public_folder/images/Edit Profile/name_icon.png" /></label>
-					<input type="text" name="fullname" placeholder="Demiloye Adeniyi" maxLength="25" defaultValue={this.data.user.fullname} />
-					<br/>
-					<label id="web_icon"><img src="public_folder/images/Edit Profile/web_icon.png" /></label>
-					<input type="Url" name="website" placeholder="www.colouredconversations.com" defaultValue={this.data.user.website} />
-					<br/>
-					<label id="bio_icon"><img src="public_folder/images/Edit Profile/bio.png" /></label>
-					<textarea name="bio" rows="6" cols="298" placeholder="Bitch im the man, yeah i said it. Im the man, dont you forget it" defaultValue={this.data.user.bio}></textarea>
-					<br/>
+					<img id="edit_avatar" className="edit_profile_avatar" src={this.data.user.photo? this.data.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';" />	
+					</button>	
+			    </div>
+			    <div id="edit_profile_container">
+					<form id="form" action="">
+						<label id="username_icon"><img src="public_folder/images/Edit Profile/username.png" /></label>
+						<input id="username" type="text" name="username" placeholder="Username" maxLength="25" defaultValue={this.data.user.username}/>
+						<label id="name_icon"><img src="public_folder/images/Edit Profile/name.png" /></label>
+						<input id="fullname"  type="text" name="fullname" placeholder="Full name" maxLength="25" defaultValue={this.data.user.fullname}/>
+						<br/>
+						<label id="bio_icon"><img src="public_folder/images/Edit Profile/bio.png" /></label>
+						<textarea name="bio" rows="6" cols="298" placeholder="Bio" maxLength="140" defaultValue={this.data.user.bio}></textarea>
+						<br/>
+						<label id="web_icon"><img src="public_folder/images/Edit Profile/web.png" /></label>
+						<input type="Url" name="website" placeholder="Website" defaultValue={this.data.user.website} />
+						<input type="button" id="save_button" value="SAVE CHANGES" />
+					</form>	
 					<p id="error_report_a" className="error_report"></p>
-					<input type="button" id="save_button" value="SAVE CHANGES" />
-				</form>		
+			    </div>	
 			</div>
 		)
 	}
@@ -272,6 +269,7 @@ document.addEventListener("click", function(event) {
 		{
 			console.log("entered the save_button update");
 			var username = document.getElementsByName("username")[0].value.trim();
+			user_info['username'] = username;
 			console.log(username);
 			var username_lowercase = username.toLocaleLowerCase();
 			var fullname = document.getElementsByName("fullname")[0].value.trim();
@@ -340,23 +338,23 @@ document.addEventListener("click", function(event) {
 	}
 	else
 	{
-		if(element.tagName == "BUTTON" && element.id == "button")
+		if(element.tagName == "BUTTON" && element.id == "edit_profile")
 		{
 			console.log("here babby");
-			React.unmountComponentAtNode(document.getElementById('footer'));
+			React.unmountComponentAtNode(document.getElementById('mid-content'));
 			React.render(
 						<Edit_profile />,
-						document.getElementById('footer')
+						document.getElementById('mid-content')
 			);
 		}
 	}
 })
 
 var updatecomponentsucceed = function () {
-	React.unmountComponentAtNode(document.getElementById('footer'));
+	React.unmountComponentAtNode(document.getElementById('mid-content'));
 	React.render(
 		<Profile_section />,
-		document.getElementById('footer')
+		document.getElementById('mid-content')
 	);
 }
 

@@ -1,0 +1,152 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+body{
+	background: #fff;
+	font-family: Open Sans, helvetica, Arial;
+	margin:0px;
+	padding: 0px;
+	-webkit-font-smoothing: antialiased;
+	width:auto;
+	text-align: center;
+}
+
+/* Header section begins*/
+
+#header{
+	position: fixed;
+	text-align: center;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	border-bottom: 1px solid rgba(0,0,0,.05);
+	background-color: #f4f2f1;
+	z-index: 1000;
+	margin:0px;
+	padding: 0px;
+}
+
+#navigation{
+	position: relative;
+	display: inline-block;
+	top: 1px;
+	width: 750px;
+	height: 49px;
+}
+
+
+#user_nav{
+	position: absolute;
+	display: inline-block;
+	padding: 0px 25px 0px 20px;
+	top: -1px;
+	left: 180px;
+	text-align: center;
+	height: 53px;
+	width: auto;
+}
+
+#user_nav .avatar {
+	top: 13px;
+	position: relative;
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	border-radius: 100%;
+	border: 1px solid rgba(0,0,0,.07)
+}
+
+#user_nav .username{
+	padding: 0px;
+	top: 0px;
+	left: 5px;
+	position: relative;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 600;
+	color:rgba(0,0,0,.7);
+	text-transform: lowercase;
+}
+
+#font_logo{
+	position: absolute;
+	font-size: 13px;
+	top: -12px;
+	letter-spacing: 1px;
+	padding: 5px;
+	color: rgba(0,0,0,.5);
+	border:1px solid rgba(255,255,255,.05);
+	width: 100px;
+}
+
+.post_button{
+	position: absolute;
+	padding: 5px 10px 5px 10px ; 
+	top: 12px;
+	right: 95px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #285794;
+	background-color: #d3e2f7;
+	border-radius: 4px;
+	border: none;
+}
+
+.log_button{
+	position: absolute;
+	padding: 5px 10px 5px 10px ; 
+	right: 0px;
+	font-size: 12px;
+	font-weight: 500;
+	color: rgba(0,0,0,.7);
+}
+
+#message{
+		padding-top: 80px;
+		margin:0 auto;
+		max-width: 550px;
+		width:auto;
+}
+
+#message h1 {
+		font-size: 120px;
+		font-weight: 500;
+		padding: 0px;
+		margin: 0px;
+		color: rgba(0,0,0,.8);
+
+}
+
+#message h3{
+		padding-top: 0px;
+		margin-top: 0px;
+		font-size: 17px;
+		opacity: .8;
+}
+
+#message h4{
+		font-size: 15px;
+		font-weight: 500;
+		padding-top: 0px;
+		margin-top: 0px;
+}
+
+
+
+#footer{
+	position: fixed;
+	bottom: 0px;
+	padding: 0px;
+	height: 50px;
+	width: 100%;
+	background-image: url("../images/blur_2.jpg");
+	border-top:1px solid rgba(0,0,0,.04);
+	text-align:center;
+}
+
+#logo_2{
+	position: relative;
+	margin: 0 auto;
+	top: 10px;
+}

@@ -2,11 +2,26 @@
 
 body{
 	font-family: Open Sans, Helvetica , Arial;
-	background-color: #f4f2f1;
-	height: auto;
+	background-color: #fff;
+	height: 100%;
 	width: 100%;
-	min-height: 100%;
-	margin: 0px;
+	min-width: 504px;
+	margin:0px;
+	padding:0px;
+	background-image: url("../images/reg_bg.jpg");
+	-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        -webkit-font-smoothing: antialiased;
+        background-attachment: fixed;
+        position: relative;
+}
+
+a{
+	text-decoration: none;
+	color: black;
 }
 
 #header{
@@ -18,9 +33,9 @@ body{
 	width: 100%;
 	height: 50px;
 	overflow: hidden;
-	border-bottom: 1px solid rgba(0,0,0,.07);
 	background-color: #fff;
 	z-index: 1000;
+	border-bottom: 1px solid rgba(0,0,0,.06)
 }
 
 #navigation{
@@ -45,12 +60,11 @@ body{
 .log_button{
 	position: absolute;
 	padding: 21px 18px 18px 22px ; 
-	top: -12px;
+	top: -18px;
 	right: 0px;
-	letter-spacing: 1px;
-	font-size: 10px;
+	font-size: 14px;
 	font-weight: 500;
-	color: rgba(0,0,0,.7);
+	color: rgba(0,0,0,.6);
 }
 
 .log_button:after {
@@ -73,15 +87,11 @@ body{
 /* End of Header Section*/
 
 #form_container{
-	top: 80px;
-	margin-right: 0px;
-	margin-left: 0px;
-	display: inline-block;
-	text-align: center;
+	top: 150px;
+	margin: 0 auto;
 	height: auto;
-	width: 100%;
-	position: relative;
- 
+	position: relative; 
+	padding-left: 120px;
 }
 
 #logo{
@@ -93,18 +103,29 @@ body{
     -moz-user-drag: none;
 }
 
-#signup-form{
+#form{
+	position: relative;
 	display: inline-block;
-	text-align: center;
+	text-align: left;
 	padding-left: 15px;
 	padding-right: 15px;
+}
+
+#disclaimer{
+	margin:0;
+	padding:0;
+	position: relative;
+	max-width: 280px;
+	text-align: center;
+	font-size: 12px;
+	opacity: .4;
 }
 
 input{
 	width: 280px;
 	height: 35px;
 	margin-bottom: 15px;
-	border-radius: 5px;
+	border-radius: 3px;
 	border:1px solid rgba(0,0,0,.1);
 	font-size: 13px;
 	font-weight: 200;
@@ -113,7 +134,6 @@ input{
 
 input:focus, textarea:focus {
 	outline: 0px;
-	box-shadow: 0 0 2px rgb(81, 203, 238);
 }
 
 input[type=submit]{
@@ -124,15 +144,21 @@ input[type=submit]{
 	width: 300px;
 	height: 45px;
 	margin-top:0px;
-	border-radius: 35px;
+	border-radius: 4px;
 	color: white;
-	background-color: #458B00;
+	background-color: #415860;
 	border:1px solid rgba(255,255,255,.3);
 	outline: none;
 }
 
 input[type=submit]:hover{
-	background: #306100;
+	opacity: .9;
+}
+
+
+input:focus, textarea:focus {
+	outline: 0px;
+	box-shadow: 0 0 1px rgb(81, 203, 238);
 }
 
 .error_report{
@@ -140,48 +166,31 @@ input[type=submit]:hover{
 	height: 25px;
 	width: 295px;
 	text-align: center;
-	font-size: 10px;
-	border: 1px dashed red;
+	font-size: 12px;
+	color:#bf0a23;
 }
 
-/*Slider begins Here*/
 
-.slideshow{
-	position:relative;
-	bottom: -130px;
-	background-color:#fff;
-	padding: 12px 0px 10px 0px; 
+#footer{
+	position: fixed;
+	bottom: 0px;
+	padding: 0px;
+	height: 50px;
 	width: 100%;
-	min-width: 100%;
-	overflow: hidden;
-	-webkit-user-drag: none;
-    -moz-user-drag: none;
-    border-top: 1px solid rgba(0,0,0, .08);
-   
+	background-image: url("../images/blur_2.jpg");
+	text-align:center;
 }
-.banner{
-	margin: 0px;
-	padding:0px;
+
+#logo_2{
 	position: relative;
-	-webkit-user-drag: none;
-    -moz-user-select: none;
-    -moz-transition:  opacity 60s ease-out; 
-    -o-transition: opacity 60s ease-out; 
-    -webkit-transition: opacity 60s ease-out; 
-    -ms-transition: opacity 60s ease-out; 
-    -webkit-animation: moveSlideshow 50s linear infinite;
-    -moz-animation:  moveSlideshow 50s linear infinite;
-    -webkit-user-drag: none;
-    -moz-user-drag: none;
-    
+	margin: 0 auto;
+	top: 10px;
 }
 
-@-webkit-keyframes moveSlideshow {
-    0% { left: 0; }
-    100% { left: -80%; }
+#sign_up_label{
+	position: relative;
+	text-align: left;
+	font-weight: 300;
+	font-size: 22px;
+	opacity: .9;
 }
-@-moz-keyframes moveSlideshow {
-    0% { left: 0; }
-    100% { left: -80%; }
-}
-

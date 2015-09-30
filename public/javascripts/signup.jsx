@@ -9,17 +9,14 @@ var signup = React.createClass({
 				<div id="header">
 					<div id="navigation">
 						<a href="/"><h5 className="font_logo">JAMKNIFE</h5></a>
-						<a href="/login"><p className="log_button">LOG IN</p></a>
+						<a href="/login"><p className="log_button">Log In</p></a>
 				     </div>	
 				</div>
 				<div id="form_container">
-					<img id= "logo" src= "images/logo.png" alt=""/>
 					<Signinform />
 				</div>
-				<div className="slideshow">
-					<div className="banner">
-						<img src="images/album_banner.png"/>
-					</div>
+				<div id="footer">
+					<img id="logo_2" src="public_folder/images/logo_2.png"/>
 				</div>	
 			</div>	
 		)
@@ -46,6 +43,16 @@ var Signinform = React.createClass({
 		pstyle['display'] = 'block';
 		this.forceUpdate();
 		return;
+	}
+
+	if (! /^[a-zA-Z0-9_]+$/.test(name))
+	{
+		React.findDOMNode(this.refs.usrname).value = '';
+		React.findDOMNode(this.refs.perror).innerHTML = "Username contain characters that we do not allow";
+		pstyle['display'] = 'block';
+		this.forceUpdate();
+    	console.log('working');
+    	return;
 	}
 
 	if(password1.length < 6)
@@ -142,7 +149,7 @@ var Signinform = React.createClass({
 
 	render: function (argument) {
 		return (
-			<form id ="signup-form" action="/" ref="url" onSubmit={this.handleSubmit}>
+			<form id ="signup-form" action="/signup" ref="url" onSubmit={this.handleSubmit}>
 				<p>Sign Up</p>
 				<input type="text" id="username" name="username" placeholder="Pick a username" maxLength="25" ref="usrname" required />
 				<br/>
@@ -154,6 +161,7 @@ var Signinform = React.createClass({
 				<br/>
 				<p id="error_id" className="error_report" style={pstyle} ref="perror"></p>
 				<input type="submit" value="Sign up"/>	
+				<p id="disclaimer"sign>By signing up, you agree to the <u><a href="http://www.google.com/">Terms of Service</a></u> and <u><a href="http://www.google.com/">Privacy Policy.</a></u></p>
 			</form>	
 		)
 	}

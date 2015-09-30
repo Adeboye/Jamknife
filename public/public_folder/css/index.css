@@ -1,0 +1,314 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+body{
+	background-color: #fff;
+	width: 100%;
+	margin:0px;
+	padding:0px;
+	text-align: center;
+	font-family: open Sans;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	min-width: 930px;
+}
+
+a{
+	text-decoration: none;
+}
+
+p{
+	margin:0px;
+	padding:0px;
+}
+
+#header{
+	min-width: 400px;
+	position: relative;
+	height: 50px;
+	margin:0 auto;
+	padding:0px;
+	text-align: center;
+	width: auto;
+	margin: 0px 60px 0px 60px;
+}
+
+
+#header_container{
+	position: relative;
+	height: 50px;
+	text-align: left;
+	margin: 0 auto;
+	margin:0px;
+	padding:0px;
+}
+
+#header_jamknife{
+	position: relative;
+	display: inline-block;
+	font-weight: 700;
+	opacity: .4;
+	font-size: 14px;
+	top: 15px;
+	text-decoration: none;
+	color: black;
+}
+
+#sign_up{
+	display: inline-block;
+	position: absolute;
+	right: 0px;
+	opacity: .6;
+	font-size: 14px;
+	top: 13px;
+	text-decoration: none;
+	color: black;
+}
+
+#sign_in{
+	display: inline-block;
+	position: absolute;
+	right: 100px;
+	opacity: .6;
+	font-size: 14px;
+	top: 13px;
+	text-decoration: none;
+	color: black;
+}
+
+#section_1{
+	width: 100%;
+	overflow: hidden;
+}
+
+#section_1_cont{
+	position: relative;
+	display: inline-block;
+	height: 660px;
+	width: 930px;
+	padding-top: 55px;
+	margin: 0px;
+	padding: 0px;
+	max-height: 660px;
+}
+
+#right_side{
+	display: inline-block;
+	position: absolute;
+	right: -150px;
+	z-index: 1;
+}
+
+#left_side{
+	position: absolute;
+	width: auto;
+	height: auto;
+	margin: 0px;
+	padding: 0px;
+	z-index: 2;
+	top: 260px;
+	left: 95px;
+
+}
+
+#section_2{
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	height: 700px;
+	width: 100%;
+	border-top: 1px solid rgba(0,0,0,.05);
+	border-bottom: 1px solid rgba(0,0,0,.05);
+	background-image: url("../images/blur_2.jpg");
+	z-index: 4;
+	text-align: center;
+	margin: 0 auto;
+
+
+}
+
+#logo_container{
+	position: relative;
+	top: -80px;
+	background-image: url("../images/logo_bg.jpg");
+	border-radius: 100%;
+	height: 232px;
+	width:232px;
+	border-top: 1px solid rgba(0,0,0,.05);
+	margin: 0 auto;
+}
+
+#logo{
+	position: relative;
+	top: 13px;
+	-webkit-user-drag: none;
+  	-khtml-user-drag: none;
+  	-moz-user-drag: none;
+  	-o-user-drag: none;
+  	user-drag: none;
+}
+
+#one_of_us{
+	position: relative;
+	top: -80px;
+	font-size: 40px;
+	font-weight: 200;
+	margin-top: 0px;
+	color: white;
+}
+
+#what_is_jamknife{
+	position: relative;
+	font-size: 18px;
+	font-weight: 200;
+	max-width: 700px;
+	text-align: center;
+	margin: 0 auto;
+	top: 0px;
+	color: white;
+}
+
+#collage{
+	position: relative;
+	top: -40px;
+	display: inline;
+	margin:0 auto;
+	text-align: center;
+	margin:0px;
+	padding:0px;
+
+}
+
+#section_3{
+	position: relative;
+	height: 700px;
+	width: 100%;
+	padding:0px;
+	margin:0px;
+	overflow: hidden;
+}
+
+#album_arts_overlay{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	z-index: 3;
+	opacity: .9;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+#album_arts{
+	position: relative;
+	min-width: 100%;
+	margin:0px;
+	padding:0px;
+	left: 0px;
+	z-index: 2;
+	overflow: hidden;
+}
+
+
+#section_4{
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	height:240px; 
+	width: 100%;
+	background-color: #0b0b0b;
+	z-index: 6;
+	padding: 0px;
+	margin:0px;
+}
+
+
+#start_collection{
+	position: relative;
+	top: 62px;
+	height: 70px;
+	width: 300px;
+	margin:0 auto;
+	background-color: #415860;
+	border-radius: 10px;
+	text-align: center;
+}
+
+#start_collection_text{
+	position: relative;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 600;
+	color: white;
+	top: 24px;
+}
+
+
+#footer{
+	background-color: #090909;
+	border-top: 1px solid rgba(225,225,225,.02);
+	height: 120px;
+	position: relative;
+	text-align: center;
+	width: 100%;
+	margin:0px;
+	padding: 0px;
+
+}
+
+#footer_container{
+	display: inline-block;
+	width: 930px;
+	height: 115px;
+	text-align: left;
+	margin:0px;
+	padding:0px;
+
+}
+
+#footer_logo{
+	display: inline-block;
+	position: relative;
+	top: 30px;
+	-webkit-user-drag: none;
+  	-khtml-user-drag: none;
+  	-moz-user-drag: none;
+  	-o-user-drag: none;
+  	user-drag: none;
+  	opacity: .4;
+
+}
+
+#footer_jamknife{
+	position: relative;
+	top: 7px;
+	font-size: 20px;
+	font-weight: 700;
+	color: #fff;
+	display: inline-block;
+	left: 15px;
+	opacity: .4;
+}
+
+#made_in{
+	display: inline-block;
+	position: relative;
+	color: #fff;
+	opacity: .5;
+	font-size: 14px;
+	top: 6px;
+	left: 210px;
+}
+
+#contact{
+	display: inline-block;
+	position: relative;
+	font-size: 14px;
+	top: 6px;
+	color: #fff;
+	left: 500px;
+	text-decoration: none;
+	opacity: .4;
+}
+
+

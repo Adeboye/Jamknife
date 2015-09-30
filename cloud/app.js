@@ -11,6 +11,7 @@ var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 app.set('views', 'cloud/views');  // Specify the folder to find templates
 app.set('view engine', 'ejs');    // Set the template engine
 app.use(parseExpressHttpsRedirect());    // Automatically redirect non-secure urls to secure ones
+//app.use(express.favicon('../public/favicon.ico'));
 app.use(express.bodyParser());    // Middleware for reading request body
 
 //app.use(app.router);
@@ -27,14 +28,20 @@ app.locals.sessionId = "";
 // path and HTTP verb using the Express routing API.
 
 
+
 app.get('/', function (req,res) {
+	res.render('homepage', {
+		title: 'Welcome to Jamknife'
+	})
+})
+
+app.get('/signup', function (req,res) {
 	res.render('registration',{
 			title: 'Jamknife Signup'
 	});
 });
 
-app.post('/', function(req,res) {
-		console.log("Reached here at least");
+app.post('/signup', function(req,res) {
 		var username = req.body.username;
 		var username_lowercase = username.toLocaleLowerCase();
 		var password = req.body.password;
@@ -55,6 +62,7 @@ app.post('/', function(req,res) {
 			user.set("fullname", "");
 			user.set("bio", "");
 			user.set("website", "");
+			user.set("pageview", 0);
 		}
 
 		user.signUp().then(function(user) {
@@ -68,6 +76,7 @@ app.post('/', function(req,res) {
 	});
 
     app.get('/login', function (req, res) { 
+    	console.log('i am so confuswed');
     	var currentUser = Parse.User.current();
 		console.log(currentUser);
          if (currentUser) {
@@ -80,7 +89,6 @@ app.post('/', function(req,res) {
 			title: 'Jamknife Login'
 		});
 	})
-
 
 
 	app.get('/authentication', function (req, res) {
@@ -96,10 +104,8 @@ app.post('/', function(req,res) {
 		var password = req.body.password;
 
 		Parse.User.logIn(username, password).then(function (user) {
-			//var string = encodeURI(user.getSessionToken());
 			var sess_cookie = user.getSessionToken();
 			res.cookie('sess_cookie', sess_cookie);
-			//res.send({redirect: '/profile?valid=' + string});
 			res.send({redirect: '/authentication'});
 		  }, function (error) {
 		  	app.locals.sessionId = "";
@@ -115,8 +121,6 @@ app.post('/', function(req,res) {
 		console.log(req.session);
 		var currentUser = Parse.User.current();
 		Parse.User.logOut();
-		console.log("I logged out");
-		console.log(currentUser);
          if (currentUser) {
               console.log('I am logging out');
               Parse.User.logOut();
@@ -127,34 +131,53 @@ app.post('/', function(req,res) {
 	})
 
 	app.get('/:user', function (req, res) {
-		//var cookie_as = decodeURI(req.query.valid);
-		/*console.log(cookie_as);
-		res.cookie('name', cookie_as);*/
-		//res.send(req.cookies);
-		console.log('i was callled');
+		console.log('i am not going crazy');
 		var user = req.params.user;
-		console.log(user);
-
+		//var currentUserID; 
 	    var query = new Parse.Query('User');
 		query.equalTo("username_lowercase", user.toLocaleLowerCase());
 		query.find({
 		  success: function(results) {
-		  	console.log("why arent you workng");
-		    //console.log( results[0].attributes.username_lowercase);
 		    if(results[0] == null)
 		    {
 		    	console.log('no result was found');
-		    	res.render('errorpage', {
+		    	/*res.render('errorpage', {
 		    		title: 'Error Page'
-		        });
+		        });*/
+				res.render('404', {
+					title: 'Page not found | Jamknife'
+				});
 		        return;
 		    }
-		    console.log(results);
-		    console.log("I printed before");
 			res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
 			res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 			res.setHeader("Expires", "0"); // Proxies.
-			console.log(Parse.User.current());
+			console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+			if(Parse.User.current())
+			{
+				currentUserID = Parse.User.current().id;
+			}
+			else
+			{
+				currentUserID = null;
+			}
+			var resultsID = results[0].id;
+			console.log(currentUserID);
+			console.log(resultsID);
+			if(currentUserID != resultsID)
+			{
+				console.log('incrementing view count***************');
+				console.log(results[0].attributes.pageview);
+				var pagecount = results[0].attributes.pageview + 1;
+				console.log(pagecount);
+				results[0].set('pageview', pagecount);
+				results[0].save().then(function  (argument) {
+					console.log("succesfful");
+				}, function (err) {
+					console.log('error');
+				})
+			}
+			res.cookie('jamknife_data', JSON.stringify(results[0]));
 			res.render('profile', {
 				title: 'Profile page'
 				//getSessionToken: user.getSessionToken()
@@ -165,9 +188,7 @@ app.post('/', function(req,res) {
 		    // Error occured
 		    console.log("why wont you work");
 		    console.log( error );
-		    res.render('errorpage', {
-		    	title: 'Error Page'
-		    });
+		    res.render('/public/public_folder/static/404.html');
 		  }
 		});
 
@@ -184,4 +205,6 @@ app.post('/', function(req,res) {
 
 
 app.listen();
+
+
 

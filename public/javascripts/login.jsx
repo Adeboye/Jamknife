@@ -9,17 +9,14 @@ var Login = React.createClass({
 				<div id="header">
 					<div id="navigation">
 						<a href="/"><h5 className="font_logo">JAMKNIFE</h5></a>
-						<a href="/"><p className="log_button">SIGN UP</p></a>
+						<a href="/signup"><p className="log_button">Sign Up</p></a>
 					</div>
 				</div>
 				<div id="form_container">
-					<img id= "logo" src= "images/logo.png" alt="" />
 					<Loginform />
 				</div>
-				<div id="slideshow" className="slideshow">
-					<div id="banner" className="banner">
-						<img src="images/album_banner.png" />
-					</div>
+				<div id="footer">
+					<img id="logo_2" src="public_folder/images/logo_2.png"/>
 				</div>
 			</div>		
 		)
@@ -104,13 +101,14 @@ var Loginform = React.createClass({
 	render: function (argument) {
 		return(
 			<form id="login-form" action="/login" ref="url" onSubmit={this.handleSubmit}>
-				<p>Sign In</p>
+				<p>Log In</p>
 				<input type="text" id="username" name="username" placeholder="Enter your username" maxLength="25" ref="usrname" required />
 				<br/>
 				<input type="password" id="password" name="password" placeholder="Enter your password" ref="pswrd" required />
 				<br/>
 				<p className="error_report" style={pstyle} ref="perror"></p>
 				<input type="submit" value="Log In" />
+				<p id="click_here">Dont have an account yet? <u><a href="/signup">click here to register.</a></u></p>
 			</form>
 		)
 	}
