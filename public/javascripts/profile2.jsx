@@ -20,9 +20,10 @@ Parse.Cloud.run("pageviews", {username: user_info.username});
 
 $(document).on("click", "#logout", function(e) {
 	   localStorage.clear();
+	   Parse.User.logOut();
  });
 
-function getPathFromUrl(url) {
+var getPathFromUrl = function (url) {
   return url.split("?")[1];
 }
 
@@ -45,7 +46,7 @@ var Navigation = React.createClass({
 			return(
 				    <div id="navigation">
 						<a href={"/" + this.data.user.username}><h5 id="font_logo">JAMKNIFE</h5></a>
-						<button className="post_button" type="button">Add a new song</button>
+						<button id="postbutton" className="post_button" type="button">Add a new song</button>
 						<a href="/signup" ><p id="logout" className="log_button">LOG OUT</p></a>
 						<div id="user_nav">
 							<img className="avatar" src={this.data.user.photo? this.data.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"}/>
@@ -93,7 +94,7 @@ var Profile_section = React.createClass({
 					<div id="profile_section">
 						<button id="edit_profile" type="button">
 						 	<i id="cog" className="fa fa-cogs"></i>
-						 	<p>EDIT PROFILE</p>
+						 	<p id="p_edit_profile">EDIT PROFILE</p>
 			 			</button>
 			 			<div id="avatar_container">
 							<img className="avatar" src={this.data.user.photo? this.data.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';"/>
@@ -186,7 +187,7 @@ React.render(
 
 var Edit_profile = React.createClass({
 	mixins: [ParseReact.Mixin],
-
+	
 	observe: function () {
 		if(Parse.User.current())
 		{	
@@ -262,7 +263,7 @@ var Edit_profile = React.createClass({
 document.addEventListener("click", function(event) {
 	var element = event.target;
 	
-	if((element.tagName == "BUTTON" && element.id == "cnc_button") || (element.tagName == "INPUT" && element.id == "save_button"))
+	if((element.tagName == "IMG" && element.id == "cancel_button") || (element.tagName == "INPUT" && element.id == "save_button"))
 	{
 		var usernametaken = false;
 		if (element.id == "save_button") 
@@ -329,7 +330,7 @@ document.addEventListener("click", function(event) {
 		}
 		else
 		{
-			if(element.id == 'cnc_button')
+			if(element.id == 'cancel_button')
 			{
 				updatecomponentsucceed();
 			}
@@ -338,7 +339,7 @@ document.addEventListener("click", function(event) {
 	}
 	else
 	{
-		if(element.tagName == "BUTTON" && element.id == "edit_profile")
+		if(element.tagName == "P" && element.id == "p_edit_profile" || element.tagName == "BUTTON" && element.id == "edit_profile")
 		{
 			console.log("here babby");
 			React.unmountComponentAtNode(document.getElementById('mid-content'));

@@ -129,7 +129,7 @@ app.post('/signup', function(req,res) {
 			title : 'Log out Page'
 		})
 	})
-
+	
 	app.get('/:user', function (req, res) {
 		console.log('i am not going crazy');
 		var user = req.params.user;
@@ -202,7 +202,6 @@ app.post('/signup', function(req,res) {
 			//getSessionToken: user.getSessionToken()
 		});*/
 	})
-
 
 app.listen();
 

@@ -1,0 +1,266 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+body{
+	position: relative;
+	background: #fff;
+	font-family: Open Sans, helvetica, Arial;
+	margin:0px;
+	padding: 0px;
+	width:auto;
+	min-width: 900px;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+}
+
+#search_overlay{
+	position: fixed;
+	height: 100%;
+	width:100%;
+	margin:0px;
+	padding: 0px;
+	background-color:rgba(0,0,0,.8); 
+	z-index: 999999999;
+	text-align: center;
+	overflow: scroll;
+}
+
+#search_console{
+	position: relative;
+	height: 600px;
+	width: 700px;
+	z-index: 9999999999;
+	background-color: white;
+	margin:0 auto;
+	top: 50%;
+	transform: translateY(-50%);
+	border-radius: 6px;
+	overflow: hidden;
+	border: 1px solid rgba(0,0,0,.2);
+	display: inline-block;
+	opacity: .97;
+}
+
+#search_console_header{
+	position: absolute;
+	height: 40px;
+	width: 700px;
+	border-bottom: 1px solid rgba(0,0,0,.1);
+	background-color: #f4f2f1;
+	opacity: 10;
+}
+
+#search_console_label{
+	position: relative;
+	font-size: 13px;
+	color: rgba(0,0,0,0.7);
+	top: 0px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+#cancel_search{
+	position: absolute;
+	top: 12px;
+	right: 20px;
+	display: inline-block;
+	position:absolute;
+	background-color: #f4f2f1;
+	border: none;
+}
+
+.container-4{
+  position: relative;
+  overflow: hidden;
+  width: 700px;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding-top: 41px;
+   margin:0px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+
+}
+
+.container-4 input#search{
+  width: 550px;
+  border: none;
+  height: 60px;
+  background: #fff;
+  font-size: 14pt;
+  font-weight: 400;
+  float: left;
+  color: rgba(0,0,0,.7);
+  padding-left: 90px;
+  padding-bottom:0px;
+  padding-top:0px;
+  margin:0px;
+  outline: none;
+}
+
+.container-4 input#search::-webkit-input-placeholder {
+   color: rgba(0,0,0,.4);
+   font-style: oblique;
+   font-weight: 200;
+   text-transform: none;
+   font-size: 11pt;
+}
+ 
+.container-4 input#search:-moz-placeholder { /* Firefox 18- */
+   color: rgba(0,0,0,.4);
+   font-style: oblique; 
+   font-weight: 200;
+   text-transform: none;
+   font-size: 11pt;
+}
+ 
+.container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
+  color: rgba(0,0,0,.4);
+   font-style: oblique;
+   font-weight: 200;
+   text-transform: none;
+   font-size: 11pt; 
+}
+ 
+.container-4 input#search:-ms-input-placeholder {  
+   color: rgba(0,0,0,.4);
+   font-style: oblique;
+   font-weight: 200;
+   text-transform: none;
+   font-size: 14pt; 
+}
+
+.container-4 button.icon{
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #fff;
+ 
+  border: none;
+  height: 60px;
+  width: 50px;
+  color: black;
+  opacity: 0;
+  font-size: 10pt;
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -ms-transition: all .55s ease;
+  -o-transition: all .55s ease;
+  transition: all .55s ease;
+}
+
+.container-4:hover button.icon, .container-4:active button.icon, .container-4:focus button.icon{
+  outline: none;
+  opacity: .9;
+  margin-left: -30px;
+}
+ 
+.container-4:hover button.icon:hover{
+  background: white;
+}
+
+
+#search_filter{
+	position: relative;
+	height: 50px;
+	width: 100%;
+	border-bottom: 1px solid rgba(0,0,0,.07);
+	margin:0px;
+	padding:0px;
+	background-color: rgba(255,255,255,.9);
+}
+
+
+#soundcloud_button{
+	position: relative;
+	display:inline-block; 
+	height: 50px;
+	width: 49%;
+	margin:0px;
+	padding:0px;
+	vertical-align: top;
+	font-size: 12px;
+	background-color: rgba(255,255,255,.9);
+	border: none;
+	border-right:1px solid rgba(0,0,0,.1);
+	color:rgba(0,0,0,.4);
+	font-weight: 500;
+}
+
+#itunes_button{
+	vertical-align: top;
+	position: relative;
+	display:inline-block; 
+	height: 50px;
+	width: 49%;
+	margin:0px;
+	padding:0px;
+	font-size: 12px;
+	color:rgba(0,0,0,.4);
+	background-color: white;
+	border: none;
+	font-weight: 500;
+}
+
+
+#results_container{
+	position: relative;
+	display: inline-block;
+	height: 442px;
+	width: 700px;
+	margin: 0, auto;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	overflow: scroll;
+}
+
+#results{
+	position: relative;
+	display: inline-block;
+	padding-left: 20px;
+	padding-top: 11px;
+	padding-bottom: 6px;
+	list-style: none;
+	height: 60px;
+	width: 530px;
+	border-bottom: 1px solid rgba(0,0,0,.08);
+	text-align: left;
+	margin: 0px;
+}
+
+#results:hover{
+	background-color: rgba(0,0,0,.03);
+}
+
+#results_container img {
+	height: 55px;
+	width: 55px;
+	border: 1px solid rgba(0,0,0,.04)
+}
+
+#results_text{
+	vertical-align: top;
+	top: 10px;
+	position: relative;
+	display: inline-block;
+	left: 10px;
+	height: 50px;
+	width: 350px;
+}
+
+.song_name{
+	font-weight: 600;
+	font-size: 10pt;
+	padding: 0px;
+	margin: 0px;
+	opacity: .9;
+}
+
+.artist_name{
+	font-weight: 500;
+	font-size: 9pt;
+	padding: 0px;
+	margin: 0px;
+	opacity: .6;
+}

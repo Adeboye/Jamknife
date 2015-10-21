@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="Post_style.css">
+</head>
+<body>
+	<div id="post_overlay">
+		<div id="post_console">
+			<div id="console_header">
+				<p id="post_label">CREATE POST</p>
+				<button id="go_back">
+					<img src="go_back.png">
+				</button>
+				<button id="cancel_post">
+					<img src="close.png">
+				</button>
+			</div>
+			<div class="post">
+				<img class="play" src="play.png" alt="">
+				<img class="video" src="video.png" alt="">
+				<div id="caption_container">
+					<p class="caption">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec purus in ante pretium blandit. Aliquam erat volutpat. Nulla libero lectus.&quot;
+					</p>
+					<ul class="post_tags">
+						<li>Trip Hop</li>
+						<li>Experimental</li>
+						<li>Alternative RnB</li>
+					</ul>
+				</div>
+				<div id="overlay"></div>
+				<img class="album_cover" src="fka.jpg" alt="">
+				<img class="pic" src="demi.jpg" alt="">
+				<p class="username">demiadeniyi</p>
+				<img class="post_source" src="soundcloud.png">
+				<p class="artist_name">FKA Twigs</p>
+				<p class="song_name">Two Weeks</p>
+			</div>
+			<div id="form_container">
+				<form id="form" action="">
+					<textarea name="bio" rows="6" placeholder="Write your story...." maxlength="160"></textarea>
+					<label for="Tags">Tags:</label>
+					<br>
+					<input id="Tags"  type="text" name="fullname" placeholder="Seperate tags using a comma ( , )" maxlength="70">
+					<label for="song_name">Song title:</label>
+					<br>				
+					<input id="song_name"  type="text" name="fullname" placeholder="Two Weeks">
+					<label for="artist_name">Artist name:</label>
+					<br>
+					<input id="artist_name"  type="text" name="fullname" placeholder="FKA Twigs">
+					<label for="youtube_link">Youtube link (optional):</label>
+					<br>
+					<input id="youtube_link"  type="text" name="fullname" placeholder="www.youtube.com/grljnekgnekrgnkelnge" maxlength="70">
+					<input type="submit" value="CREATE">
+				</form>				
+			</div>				
+		</div>
+	</div>
+</body>
+</html>
