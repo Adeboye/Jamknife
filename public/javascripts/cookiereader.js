@@ -15,5 +15,5 @@
         return cookies[name];
     }
 
-    window.readCookie = readCookie; // or expose it however you want
+    window.readCookie = readCookie; 
 })();
