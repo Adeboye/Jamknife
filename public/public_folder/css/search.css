@@ -213,6 +213,7 @@ body{
 	padding: 0px;
 	text-align: center;
 	overflow: scroll;
+	cursor: pointer;
 }
 
 #results{

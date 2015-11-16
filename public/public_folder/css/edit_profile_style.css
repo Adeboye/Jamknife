@@ -63,10 +63,10 @@ body{
 	left: 5px;
 	position: relative;
 	display: inline-block;
-	font-size: 12px;
-	font-weight: 600;
-	color:rgba(0,0,0,.9);
-	text-transform: lowercase;
+	font-size: 11px;
+	font-weight: 400;
+	color:rgba(0,0,0,.7);
+	text-transform: uppercase;
 }
 
 #font_logo{
@@ -111,7 +111,7 @@ body{
 }
 
 
-#profile_section{
+#edit_profile_section{
 	position: relative;
 	height: 200px;
 	width: 900px;
@@ -327,6 +327,8 @@ input[id="save_button"]{
 	text-align: center;
 
 }
+
+
 
 
 

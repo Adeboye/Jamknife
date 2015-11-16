@@ -1,5 +1,3 @@
-console.log('hello');
-
 var search_result = {
 	postProp : "",
 	set postPropval(val) {
@@ -204,13 +202,15 @@ var SearchResults = React.createClass({
 		
 		if(apisource == "soundcloud")
 		{
-			result['stream_url'] = result['stream_url'] + "?client_id=" + soundcloudparams['client_id']; 
-			result['artwork_url'] = (result['artwork_url']).replace("-large", "-t500x500");
+			result['stream_url'] = result['stream_url'] + "?client_id=" + soundcloudparams['client_id'];
+			result['artwork_url_small'] = (result['artwork_url']).replace("-large", "-t200x200")
+			result['artwork_url_large'] = (result['artwork_url']).replace("-large", "-t500x500");
 			console.log(result['stream_url']);
 		}
 		if(apisource == "itunes")
 		{
-			result['artworkUrl100'] = (result['artworkUrl100']).replace("100x100bb", "600x600bb");
+			result['artworkUrl600'] = (result['artworkUrl100']).replace("100x100bb", "600x600bb");
+			result['artworkUrl200'] = (result['artworkUrl100']).replace("100x100bb", "200x200bb");
 		}
 		
 
@@ -280,6 +280,16 @@ var SearchBox = React.createClass({
 	whichProvider: function (e) {
 	  this.providerProp = e.target.name;
 	  console.log(this.providerProp);
+	  if(this.providerProp == "soundcloud")
+	  {
+	  	e.target.style.background = '#ADD8E6';
+		this.refs.itunes.getDOMNode().style.background = "";
+	  }
+	  else
+	  {
+	  	e.target.style.background = '#ADD8E6';
+		this.refs.soundcloud.getDOMNode().style.background = "";  
+	  }
 	},
 	
 	handleSearchSubmit: function (searchtext) {
@@ -311,7 +321,7 @@ var SearchBox = React.createClass({
 			that.setState({set: {data: result ,provider: that.providerProp}});
 			//that.setState({ set: {data: result}});
 		}).catch(function(error) {
-			console.log("Failed! ", error);
+			console.log("Failed! ", error.message);
 		});
 	},
 	
@@ -330,8 +340,8 @@ var SearchBox = React.createClass({
 				    </button>
 					<SearchBar onSearchSubmit={this.handleSearchSubmit}/>
 					<div id="search_filter">
-						<button id="soundcloud_button" name="soundcloud" onClick={this.whichProvider}>Soundcloud</button>
-						<button id="itunes_button" name="itunes" onClick={this.whichProvider}>iTunes</button>		
+						<button id="soundcloud_button" name="soundcloud" onClick={this.whichProvider} ref="soundcloud">Soundcloud</button>
+						<button id="itunes_button" name="itunes" onClick={this.whichProvider} ref="itunes">iTunes</button>		
 					</div>
 					{/*<SearchResults data={[this.state.data, this.state.provider]}/>*/}
 					<SearchResults data={[this.state.set.data, this.state.set.provider]}/>

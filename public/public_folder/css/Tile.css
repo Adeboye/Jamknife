@@ -1,0 +1,217 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+body{
+	position: relative;
+	background: #fff;
+	font-family: Open Sans, helvetica, Arial;
+	margin:0px;
+	padding: 0px;
+	width:auto;
+	min-width: 900px;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#main_overlay{
+	position: fixed;
+	height: 100%;
+	width:100%;
+	margin:0px;
+	padding: 0px;
+	background-color:rgba(0,0,0,.9); 
+	z-index: 999999999;
+	text-align: center;
+	overflow: scroll;
+}
+
+#close_big_tile{
+	position: absolute;
+	top: 30px;
+	right:30px;
+	opacity: .5;
+}
+
+#share_big_tile{
+	position: absolute;
+	top: 10px;
+	right:-70px;
+	opacity: .8;
+}
+
+#big_tile{
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	margin:0 auto;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 550px;
+	width: 550px;
+}
+
+#play_big_tile{
+	position: absolute;
+	right: 36px;
+	top: 36px;
+	z-index: 903;
+}
+
+#caption_container_big_tile{
+	position: relative;
+	text-align: center;
+	left: 36px;
+	right: 36px;
+  	width: 478px;
+  	max-height: 360px;
+  	height: auto;
+	z-index: 902;
+	top: 50%;
+    transform: translateY(-50%);
+}
+
+.caption_big_tile{
+	position: relative;
+	color: white;
+	letter-spacing:.05em;
+	font-size: 16px;
+	font-weight: 200;
+	font-style: oblique;
+}
+
+.tags_big_tile{
+	position: relative;
+	color: white;
+	letter-spacing:.05em;
+	font-size: 12px;
+	font-weight: 200;
+	left: 0px;
+	padding: 0px;
+}
+
+.tags_big_tile li {
+	position: relative;
+	display: inline-table;
+	border: 1px solid white;
+	border-radius: 25px;
+	padding: 4px 10px 4px 10px;
+	margin: 7px 5px 0px 0px;
+	text-transform: capitalize; 
+}
+
+.tags_big_tile li:hover {
+	background-color:#fff;
+	color:black;
+	border-style: none;
+}
+
+#overlay_big_tile {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 550px;
+	width: 550px;
+	background-color: black;
+	border:1px solid rgba(0,0,0,.2);
+	opacity: .7;
+	display: inline-block;
+	z-index: 901;
+}
+
+.album_cover_big_tile{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 550px;
+	width: 550px;
+	border:1px solid rgba(0,0,0,.2);
+	display: inline-block;
+	z-index: 900;
+}
+
+.avatar_big_tile{
+	position:absolute;
+	top: 35px;
+	left: 35px;
+	height: 60px;
+	width: 60px;
+	border-radius: 100%;
+	border:1px solid rgba(255,255,255,.08);
+	z-index: 902;
+}
+
+.username_big_tile{
+	position:absolute;
+	top: 23px;
+	font-weight: 600;
+	font-size: 20px;
+	color: white;
+	left: 105px;
+	z-index: 902;
+	max-width: 282px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+#video_big_tile{
+	position:absolute;
+	top: 50px;
+	color: white;
+	right: 105px;
+	opacity: .8;
+	z-index: 902;
+}
+
+
+.source_big_tile{
+	position:absolute;
+	top: 73px;
+	left: 105px;
+	z-index: 902;
+}
+
+
+.artist_name_big_tile{
+	position:absolute;
+	top: 480px;
+	letter-spacing: .03;
+	font-weight: 200;
+	font-size: 16px;
+	color: white;
+	left: 36px;
+	max-width:478px; 
+	z-index: 902;
+	text-align: left;
+}
+
+.song_name_big_tile{
+	position:absolute;
+	letter-spacing: .03em;
+	text-align: left;
+	top: 450px;
+	font-weight: 500;
+	font-size: 20px;
+	color: #51b8d7;
+	max-width:478px;
+	-webkit-filter: brightness(120%);
+	left: 36px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	z-index: 902;
+}
+
+
+#scroll_right{
+	position: absolute;
+	margin-left: 300px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#scroll_left{
+	position: absolute;
+	margin-left: -350px;
+	top: 50%;
+	transform: translateY(-50%);
+}

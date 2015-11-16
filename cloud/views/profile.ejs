@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<title><%= title %></title>
-	<link rel="stylesheet" type="text/css" href="/public_folder/css/profile_style.css">
-	<link rel="stylesheet" type="text/css" href="/public_folder/css/edit_profile_style.css">
-	<link rel="stylesheet" type="text/css" href="/public_folder/css/search.css">
+	<link rel="stylesheet" type="text/css" href="public_folder/css/Tile.css">
 	<link rel="stylesheet" type="text/css" href="/public_folder/css/post_style.css">
+	<link rel="stylesheet" type="text/css" href="/public_folder/css/search.css">
+	<link rel="stylesheet" type="text/css" href="/public_folder/css/edit_profile_style.css">
+	<link rel="stylesheet" type="text/css" href="/public_folder/css/profile_style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
@@ -15,10 +16,10 @@
 		Parse.initialize("<%=parseApplicationId%>", "<%=parseJavascriptkey%>");
     </script>
     <script type="text/javascript">
-        var cookie = window.readCookie("jamknife_data");
-    	var user_id = decodeURIComponent(cookie);
-    	console.log(user_id);
-    	var user_info = JSON.parse(user_id);
+        //var cookie = window.readCookie("jamknife_data");
+    	//var user_id = decodeURIComponent(cookie);
+    	//console.log(user_id);
+    	//var user_info = JSON.parse(user_id);
     </script>
     <script src="https://fb.me/react-0.13.3.js"></script>
     <script src="https://www.parsecdn.com/js/parse-react.js"></script>
@@ -28,21 +29,11 @@
 	<script src="/javascripts/post.jsx" type="text/jsx"></script>
 </head>
 <body>
-<div id="header">
-</div>
 <div id="search_container">
 </div>
 <div id="post_container">
 </div>
-<div id="container">
-	<div id="mid-content">
-	</div>
-	<div id="second_header">
-		<p id="second_header_label">CRATE</p>
-	</div>
-	<div id="favorites"></div>
-	<div id="crate_container">
-	</div>
+<div id="content">
 </div>			
 </body>
 </html>
