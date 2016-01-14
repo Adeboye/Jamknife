@@ -1,0 +1,245 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+body {
+	background: #fff;
+	font-family: Open Sans, helvetica, Arial;
+	margin:0px;
+	padding: 0px;
+}
+
+#main_overlay{
+	position: fixed;
+	height: 100%;
+	width:100%;
+	margin:0px;
+	padding: 0px;
+	background-color:rgba(0,0,0,.80);
+	z-index: 999999999;
+	text-align: center;
+	/*overflow: scroll;   //breaking scroll*/
+}
+
+#close_lightbox{
+	position: absolute;
+	top: 30px;
+	right:30px;
+	opacity: .5;
+	cursor: pointer;
+}
+
+#shareto_container{
+	position: absolute;
+	top: 10px;
+	right: -150px;
+	background-color: rgba(255,255,255,1);
+	width: 100px;
+	height: 35px;
+	border-radius: 5px;
+	z-index: 1;
+	padding-top: 5px;
+	padding-bottom: 1px;
+}
+
+#shareto_twitter{
+	z-index: 2;
+	position: relative;
+	cursor: pointer;
+}
+
+#shareto_facebook{
+	padding-right: 4px;
+	cursor: pointer;
+}
+
+#lightbox{
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	margin:0 auto;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 550px;
+	width: 550px;
+}
+
+#lightbox_timestamp{
+	position: absolute;
+	top: -40px;
+	left:10px;
+	opacity: .7;
+	color: white;
+	font-size: 12px;
+}
+
+#scroll_right{
+	position: absolute;
+	margin-left: 300px;
+	top: 50%;
+	transform: translateY(-49%);
+	opacity: .6;
+	cursor: pointer;
+}
+
+#scroll_left{
+	position: absolute;
+	margin-left: -350px;
+	top: 50%;
+	transform: translateY(-49%);
+	opacity: .6;
+	cursor: pointer;
+
+}
+
+#play_lightbox{
+	position: absolute;
+	right: 36px;
+	top: 36px;
+	z-index: 903;
+	cursor: pointer;
+}
+
+#lightbox_caption_container{
+	position: relative;
+	text-align: center;
+	left: 36px;
+	right: 36px;
+  	width: 478px;
+  	max-height: 360px;
+  	height: auto;
+	z-index: 902;
+	top: 49%;
+    transform: translateY(-49%);
+}
+
+#lightbox .lightbox_caption{
+	position: relative;
+	color: white;
+	letter-spacing:.05em;
+	font-size: 16px;
+	font-weight: 300;
+	font-style: oblique;
+}
+
+#lightbox .lightbox_tags{
+	position: relative;
+	color: white;
+	letter-spacing:.05em;
+	font-size: 12px;
+	font-weight: 200;
+	left: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+
+#lightbox .lightbox_tags li {
+	position: relative;
+	display: inline-table;
+	border: 1px solid white;
+	border-radius: 25px;
+	padding: 4px 10px 4px 10px;
+	margin: 7px 5px 0px 0px;
+	text-transform: capitalize; 
+}
+
+#lightbox .lightbox_tags li:hover {
+	background-color:#fff;
+	color:black;
+	border-style: none;
+}
+
+#lightbox_overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 550px;
+	width: 550px;
+	background-color: black;
+	opacity: .55;
+	display: inline-block;
+	z-index: 901;
+}
+
+.lightbox_album_cover{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 550px;
+	width: 550px;
+	display: inline-block;
+	z-index: 900;
+	}
+
+.lightbox_avatar{
+	position:absolute;
+	top: 35px;
+	left: 35px;
+	height: 60px;
+	width: 60px;
+	border-radius: 100%;
+	border:1px solid rgba(255,255,255,.08);
+	z-index: 902;
+}
+
+.lightbox_username{
+	position:absolute;
+	top: 16px;
+	font-weight: 700;
+	font-size: 24px;
+	color: white;
+	left: 105px;
+	z-index: 902;
+	max-width: 282px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+}
+
+#lightbox_video_button{
+	position:absolute;
+	top: 53px;
+	color: white;
+	right: 105px;
+	z-index: 902;
+	cursor: pointer;
+}
+
+.lightbox_source{
+	position:absolute;
+	top: 73px;
+	left: 105px;
+	z-index: 902;
+}
+
+.lightbox_artist_name{
+	position:absolute;
+	top: 480px;
+	letter-spacing: .03;
+	font-weight: 600;
+	font-size: 18px;
+	left: 36px;
+	width:478px; 
+	z-index: 902;
+	text-align: left;
+	color: #51b8d7;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+
+}
+
+.lightbox_song_name{
+	position:absolute;
+	letter-spacing: .03em;
+	text-align: left;
+	top: 450px;
+	font-weight: 600;
+	font-size: 20px;
+	width:478px;
+	left: 36px;
+	z-index: 902;
+	color: white;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+

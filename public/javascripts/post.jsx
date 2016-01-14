@@ -49,19 +49,21 @@ var Form_container = React.createClass({
 		return (
 			<div id="post_form_container">
 				<form id="post_form" action="">
-					<textarea className="bio" name="bio" rows="6" defaultValue="Write your story...." /*value={this.props.bio}*/ maxLength="160" onChange={this.handleChange} ref="bio"/>
+					<label htmlFor="caption">Caption:</label>
+					<br/>
+					<textarea className="caption" name="caption" rows="6" defaultValue="Write your story...." /*value={this.props.bio}*/ maxLength="160" onChange={this.handleChange} ref="bio"/>
 					<label htmlFor="Tags">Tags:</label>
 					<br/>
-					<input id="post_main_tags" className="inputbox" type="text" name="fullname" defaultValue="Seperate tags using a comma ( , )" maxLength="70" onChange={this.handleTagChange} ref="tags"/>
+					<input id="post_main_tags" type="text" name="fullname" defaultValue="Seperate tags using a comma ( , )" maxLength="70" onChange={this.handleTagChange} ref="tags"/>
 					<label htmlFor="song_name">Song title:</label>
 					<br/>
-					<input id="post_main_song_name" className="inputbox" type="text" name="fullname" value={this.props.songname} onChange={this.handleChange} ref="songname"/>
+					<input id="post_main_song_name" type="text" name="fullname" value={this.props.songname} onChange={this.handleChange} ref="songname"/>
 					<label htmlFor="artist_name">Artist name:</label>
 					<br/>
-					<input id="post_main_artist_name" className="inputbox" type="text" name="fullname" value={this.props.artistname} onChange={this.handleChange} ref="artistname"/>
+					<input id="post_main_artist_name" type="text" name="fullname" value={this.props.artistname} onChange={this.handleChange} ref="artistname"/>
 					<label htmlFor="youtube_link">Youtube link (optional):</label>
 					<br/>
-					<input id="post_main_youtube_link" className="inputbox" type="text" name="fullname" defaultValue="Youtube link goes here" maxLength="70" ref="youtube"/>
+					<input id="post_main_youtube_link" type="text" name="fullname" defaultValue="Youtube link goes here" maxLength="70" ref="youtube"/>
 					<input type="submit" value="CREATE" onClick={this.savePost}/>
 				</form>	
 			</div>		
@@ -86,7 +88,7 @@ var Post = React.createClass({
 	playSound : function (e) {
 		e.preventDefault();
 		var audioplayer = document.getElementById('playbackaudio');
-		console.log('i was clicked');
+		//console.log('i was clicked');
 		if(audioplayer.paused == false)
 		{
 			audioplayer.pause();
@@ -98,7 +100,7 @@ var Post = React.createClass({
 	},
 	
 	render: function () {
-		console.log(this.props.tags);
+		//console.log(this.props.tags);
 		var tagfeed = (this.props.tags).map(function(tag) {
 			return (
 				<li>{tag}</li>
@@ -106,27 +108,27 @@ var Post = React.createClass({
 		})
 	
 		return (
-			<div className="post_main">
-				<a><img className="post_play_button" src="public_folder/images/Post/play.png" onClick={this.playSound} alt=""/></a>
-				<img className="post_video_button" src="public_folder/images/Post/video.png" alt=""/>
+			<div id="post_lightbox">
+				<a><img id="play_lightbox" src="public_folder/images/Post/play.png" onClick={this.playSound} alt=""/></a>
 				<audio id="playbackaudio">
 					Your browser does not support the <code>audio</code> element.
 					<source src={this.props.songsource}/>
 				</audio>
 					
-				<div id="post_caption_container">
-					<p className="post_caption">{this.props.bio}</p>
-					<ul className="post_tags">
+				<div id="lightbox_caption_container">
+					<p className="lightbox_caption">{this.props.bio}</p>
+					<ul className="lightbox_tags">
 						{tagfeed}
 					</ul>
 				</div>
-				<div id="post_main_overlay"></div>
-				<img className="post_album_cover" src={this.props.imageSource} alt=""/>
-				<img className="post_pic" src={checkNested(this.data.user[0], 'username') ? this.data.user[0].photo.url() : "public_folder/images/Edit Profile/default_picture.png"} alt=""/>
-				<p className="post_username">{checkNested(this.data.user[0], 'username') ? this.data.user[0].username : ""}</p>
-				<img className="post_source" src={(this.props.apiImageSrc == "itunes") ? "public_folder/images/Post/itunes.png" : "public_folder/images/Post/soundcloud.png"} />
-				<p className="post_artist_name">{this.props.artistname}</p>
-				<p className="post_song_name">{this.props.songname}</p>
+				<div id="lightbox_overlay"></div>
+				<img className="lightbox_album_cover" src={this.props.imageSource} alt=""/>
+				<img className="lightbox_avatar" src={this.data.user.photo? this.data.user[0].photo.url() : "public_folder/images/Edit Profile/default_picture.png"} alt=""/>
+				<p className="lightbox_username">{checkNested(this.data.user[0], 'username') ? this.data.user[0].username : ""}</p>
+				<img className="lightbox_video_button" src="public_folder/images/Post/video.png" alt=""/>
+				<img className="lightbox_source" src={(this.props.apiImageSrc == "itunes") ? "public_folder/images/Post/itunes.png" : "public_folder/images/Post/soundcloud.png"} />
+				<p className="lightbox_artist_name">{this.props.artistname}</p>
+				<p className="lightbox_song_name">{this.props.songname}</p>
 			</div>
 		)
 	}
@@ -134,18 +136,19 @@ var Post = React.createClass({
 
 var Console_header = React.createClass({
 	handleClickEvent: function () {
-		React.unmountComponentAtNode(document.getElementById('post_container'));
+		//React.unmountComponentAtNode(document.getElementById('post_container'));
+		postUnmount();
 	},
 	
 	render: function () {
 		return(
 		   <div id="post_console_header">
-				<p id="post_label">CREATE POST</p>
+				<p id="post_console_header_label">POST SONG</p>
 				<button id="post_go_back">
 					<img src="public_folder/images/Post/go_back.png"/>
 				</button>
-				<button id="post_cancel_post" onClick={this.handleClickEvent}>
-					<img src="public_folder/images/Post/close.png" />
+				<button id="cancel_post" onClick={this.handleClickEvent}>
+					<img src="public_folder/images/Post/cancel_post.png" />
 				</button>
 			</div>
 		)	
@@ -187,13 +190,13 @@ var Post_overlay = React.createClass({
 			return val.trim();
 		})
 		
-		console.log(trimmedtag);
+		//console.log(trimmedtag);
 		var newtag = trimmedtag.filter(function(val) {
 			return val !== ""; 
 		})
 		
 		//tags: this.state.tags.concat(newtag)
-		console.log(newtag);
+		//console.log(newtag);
 		this.setState({
 			tags: newtag
 		});
@@ -208,9 +211,10 @@ var Post_overlay = React.createClass({
 									  apisource: this.props.result.apisource,
 									  largeimage: this.props.result.apisource == "soundcloud" ? this.props.result.artwork_url_large : this.props.result.artworkUrl600,
 									  smallimage: this.props.result.apisource == "soundcloud" ? this.props.result.artwork_url_small : this.props.result.artworkUrl200,
+									  playbackurl: this.props.result.apisource == "soundcloud" ?  this.props.result.stream_url : this.props.result.previewUrl,
 									  requesteduser: getusername()}, {
 			success: function()	{
-				console.log("Successfully created new post for user");
+				//console.log("Successfully created new post for user");
 				window.myspecialfunc.refresh();
 				postUnmount();
 			},
@@ -225,6 +229,9 @@ var Post_overlay = React.createClass({
 			<div id="post_overlay">
 				<div id="post_console">
 					<Console_header/>
+					<button id="change_post_bg">
+						<img src="public_folder/images/Post/camera.png" id="post_camera_icon" title="Edit image" />
+					</button>
 					<Post 
 					 	artistname={this.state.artistname} 
 						songname={this.state.songname} 

@@ -1,204 +1,218 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 
-body{
+body {
 	background: #fff;
 	font-family: Open Sans, helvetica, Arial;
 	margin:0px;
 	padding: 0px;
 	-webkit-font-smoothing: antialiased;
-	width:auto;
-	min-width: 900px;
-	overflow: scroll;
+	-moz-osx-font-smoothing: grayscale;
+
 }
 
-/* Header section begins*/
+/***************** Header ********************/
 
-#header{
+#header {
 	position: fixed;
+	display: inline-block;
 	text-align: center;
-	top: 0px;
-	left: 0px;
 	width: 100%;
-	height: 50px;
-	overflow: hidden;
+	height: 55px;
 	border-bottom: 1px solid rgba(0,0,0,.05);
-	background-color: #f4f2f1;
-	z-index: 1000;
-	margin:0px;
-	padding: 0px;
+	background-color: #fff;
+	z-index: 4;	
 }
 
 #navigation{
 	position: relative;
 	display: inline-block;
-	top: 1px;
 	width: 750px;
-	height: 49px;
+	height: 50px;
+	top: 2px;
 }
 
+#text_logo{
+	position: absolute;
+	text-decoration: none;
+	font-size: 14px;
+	top: -12px;
+	letter-spacing: 1px;
+	padding: 5px;
+	color: rgba(0,0,0,.5);
+	width: 100px;
+	cursor: pointer;
+}
 
-#user_nav{
+#nav_container{
 	position: absolute;
 	display: inline-block;
-	padding: 0px 25px 0px 20px;
 	top: -1px;
 	left: 180px;
 	text-align: center;
-	height: 53px;
+	height: 50px;
 	width: auto;
 }
 
-#user_nav .avatar {
-	top: 13px;
+#nav_container .avatar {
 	position: relative;
 	display: inline-block;
 	height: 30px;
 	width: 30px;
 	border-radius: 100%;
-	border: 1px solid rgba(0,0,0,.07)
+	border: 1px solid rgba(0,0,0,.07);
+	top: 10px;
+	cursor: pointer;
 }
 
-#user_nav .username{
-	padding: 0px;
+#nav_container .username{
 	top: 0px;
 	left: 5px;
 	position: relative;
 	display: inline-block;
-	font-size: 11px;
+	font-size: 0.833em;
 	font-weight: 600;
 	color:rgba(0,0,0,.7);
-	text-transform: lowercase;
-}
-
-#font_logo{
-	position: absolute;
-	font-size: 13px;
-	top: -12px;
-	letter-spacing: 1px;
-	padding: 5px;
-	color: rgba(0,0,0,.5);
-	border:1px solid rgba(255,255,255,.05);
-	width: 100px;
+	cursor: pointer;
 }
 
 .post_button{
 	position: absolute;
 	padding: 5px 10px 5px 10px ; 
 	top: 12px;
-	right: 95px;
+	right: 100px;
 	font-size: 12px;
 	font-weight: 500;
 	color: #285794;
 	background-color: #d3e2f7;
 	border-radius: 4px;
 	border: none;
+	cursor: pointer;
+}
+
+.post_button:hover {
+	background-color: #285794;
+	color: white;
 }
 
 .log_button{
 	position: absolute;
-	padding: 5px 10px 5px 10px ; 
-	right: 0px;
+	right: 10px;
+	top: 6px;
 	font-size: 12px;
-	font-weight: 500;
+	font-weight: 600;
 	color: rgba(0,0,0,.7);
-	text-transform: capitalize;
+	text-transform: uppercase;
+	cursor: pointer;
 }
 
-#container{
-	position: relative;
-	height: 1000px;
-	width: auto;
-	margin: 0 auto;
+/***************** Profile Information Section ********************/
+
+#profile_section_container{
+	width: 100%;
+	height: 260px;
+	text-align: center;
+	padding-top: 20px;	
+	padding-bottom: 20px;
 }
 
 #profile_section{
 	position: relative;
+	top: 60px;
 	height: 200px;
 	width: 900px;
 	margin: 0 auto;
-	padding-top: 70px;
-
+	text-align: left;
 }
 
-#edit_profile{
+#edit_profile_button{
 	position: absolute;
+	top: 10px;
 	right: 100px;
 	background-color: #fff;
 	border: 1px solid rgba(0,0,0,.05);
-	padding: 7px 10px 7px 10px ; 
-	border-radius: 4px;
+	padding: 7px 15px 7px 15px ; 
+	border-radius: 35px;
+	font-size: 10px;
+	background-color: #d3e2f7;
+	font-weight: 700;
+	color: #285794;
 }
 
-button:focus{
-	outline:0 !important;
-}
 
-button:active{
-	opacity: .5;
+#edit_profile_button:hover{
+	cursor: pointer;
+	background-color: #285794;
+	color: white;
 }
 
 #cog{
-	display: inline-block;
-	opacity: .7;
-	left: 0px;
-}
-
-
-#edit_profile p {
-	display: inline-block;
-	opacity: .6;
-	font-size: 10px;
-	font-weight: 600;
-	margin: 0px 0px 0px 4px;
-	padding:0px;
-
-}
-
-#profile_container{
 	position: relative;
+	left: -5px;
+}
+
+#profile_section .avatar{
 	display: inline-block;
+	position: relative;
+	border-radius:100%;
+	border: 1px solid rgba(0,0,0,.09);
+	left: 70px;
+	height: 160px;
+	width: 160px;
+	top: 20px;
+}
+
+#profile_info_container{
+	display: inline-block;
+	position: relative;
 	vertical-align: top;
-	padding: 10px;
-	text-align: left;
-	left: 80px;
+	top: 20px;
+	left: 110px;
+	width: 500px;
 	top: 49%;
 	transform: translateY(-50%);
-	max-height: 200px;
-	max-width: 500px;
-
+	max-height: 160px;
 }
 
-.username{
-	font-size: 23px;
+#profile_info_container .username{
+	font-size: 1.44em;
 	font-weight: 700;
 	opacity: .7;
 	margin:0px;
 	padding:0px;
 	text-transform: lowercase;
+	display: inline-block;
 }
 
 #share_button{
 	position: relative;
-	left: 20px;
+	display: inline-block;
+	left: 10px;
 	opacity: .5;
 	background-color: #fff;
 	border: none;
+	cursor: pointer;
 }
 
-.bio{
+#profile_info_container .fullname{
+	font-size: 1em;
+	font-weight: 600;
+	margin:0px;
+	padding:0px;
+	opacity: .7;
+	text-transform: uppercase;
+}
 
-	font-size: 14px;
+#profile_info_container .bio{
+	font-size: 0.833em;
 	font-weight: 400;
-	margin-top:5px;
+	margin-top:0px;
 	margin-bottom:0px;
 	padding:0px;
 	opacity: .8;
-	font-style: oblique;
-
-
 }
-.website{
-	font-size: 14px;
+
+#profile_info_container .website{
+	font-size: 0.833em;
 	font-weight: 400;
 	margin:0px;
 	padding:0px;
@@ -206,28 +220,11 @@ button:active{
 	color: #285794;
 }
 
-.full_name{
-	font-size: 14px;
-	font-weight: 400;
-	margin:0px;
-	padding:0px;
-	opacity: .6;
-	text-transform: uppercase;
-
-}
-
-#counters{
+#counters_container{
 	width: 400px;
 }
 
-#eye{
-	position: relative;
-	display: inline-block;
-	opacity: .6;
-}
-
-
-#views{
+#views_counter_container{
 	position: relative;
 	height: 30px;
 	display: inline-block;	
@@ -235,37 +232,36 @@ button:active{
 	margin: 0px;
 }
 
+#eye{
+	position: relative;
+	display: inline-block;
+	opacity: .8;
+	padding-right: 8px;
+}
+
 #views_label{
 	position: relative;
 	display: inline-block;
-	font-size: 13px;
-	font-weight: 600;
+	font-size: 1em;
+	font-weight: 700;
 	padding: 0px;
 	margin: 0px;
-	opacity: .65;
-	padding-left:4px 
+	opacity: .7;
+	padding-right: 5px;
 }
 
 .no_of_views{
 	position: relative;
 	display: inline-block;
-	font-size: 13px;
+	font-size: 1em;
 	font-weight: 600;
 	padding: 0px;
 	margin: 0px;
-	opacity: .7; 
-	padding-left:4px;
+	opacity: .7;
+	font-weight: 700; 
 }
 
-#box{
-	position: relative;
-	display: inline-block;
-	opacity: .6;
-	padding-left:4px;
-}
-
-
-#crate{
+#crate_counter_container{
 	position: relative;
 	height: 30px;
 	left: 30px;
@@ -274,74 +270,58 @@ button:active{
 	margin: 0px;
 }
 
+#music_note{
+	position: relative;
+	display: inline-block;
+	opacity: .8;
+	padding-right: 8px;
+}
+
 #crate_label{
 	position: relative;
 	display: inline-block;
-	font-size: 13px;
+	font-size: 1em;
 	font-weight: 600;
 	padding: 0px;
 	margin: 0px;
-	opacity: .65;
-	padding-left:4px;
+	opacity: .7;
+	font-weight: 700;
+	padding-right: 5px; 
 }
 
 .no_of_songs{
 	position: relative;
 	display: inline-block;
-	font-size: 13px;
+	font-size: 1em;
 	font-weight: 600;
 	padding: 0px;
 	margin: 0px;
 	opacity: .7;
-	padding-left:4px;
+	font-weight: 700;
 }
+
+/***************** Header titled 'Crate' ********************/
+
+
 #second_header{
 	position: relative;
 	height: 50px;
-	width: 900px;
+	width: 100%;
 	margin: 0 auto;
 	padding: 0px;
-	border-top: 1px solid rgba(0,0,0,.06); 
 	text-align: center;
+	border-bottom: 1px solid rgba(0,0,0,.16078);
+	background-color: #fefefe;
 }
 
 #second_header_label{
 	position: relative;
 	font-size: 16px;
 	color: rgba(0,0,0,0.4);
-}
-
-#avatar_container{
-	position: relative;
-	padding: 5px;
-	width: 160px;
 	display: inline-block;
-	left: 70px;
 }
 
-#profile_section .avatar{
-	position: relative;
-	margin: 0px;
-	padding-bottom:2px; 
-	height: 160px;
-	width: 160px;
-	border-radius:100%;
-	border: 1px solid rgba(0,0,0,.09)
-}
-
-
-#favorites{
-	position: relative;
-	left: 0px;
-	height: 235px;
-	width: 100%;
-	padding: 0px;
-	margin:0px;
-	background-image: url("../images/blur.jpg");
-	border-bottom: 1px solid rgba(0,0,0,.02); 
-}
-
-#edit_crate{
+#edit_crate_button{
 	margin-left: 200px;
 	margin-top:12px;
 	position: absolute;
@@ -354,9 +334,30 @@ button:active{
 	font-weight: 700;
 	color: #285794;
 	border-radius: 25px;
+	cursor: pointer;
 }
 
-#fav_label_container{
+
+#edit_crate_button:hover{
+	background-color: #285794;
+	color: white;
+}
+
+/***************** Current Rotation ********************/
+
+#favorites{
+	position: relative;
+	left: 0px;
+	height: 280px;
+	padding: 0px;
+	margin:0px;
+	background-color: #f6f6f6;
+	border-bottom: 1px solid rgba(0,0,0,.06);
+	text-align: center; 
+	min-width: 1000px;
+}
+
+#favorites_label_container{
 	margin: 0 auto;
 	width: 910px;
 	text-align: left;
@@ -368,6 +369,8 @@ button:active{
 	position: relative;
 	top: 2px;
 	opacity: .6;
+	color: black;
+	padding-right: 7px;
 }
 
 .fav_label{
@@ -375,37 +378,57 @@ button:active{
 	position: relative;
 	width: 200px;
 	display: inline-block;
-	opacity: .8;
-	font-size: 10px;
+	opacity: .75;
+	font-size: 11px;
 	font-weight: 600;
-	color: rgba(0,0,0,.9);
+	color: black;
 	margin: 0px;
 	padding: 0px;
 	padding-top: 5px;
 }
 
-
-
-#list_of_favorites{
-	position: relative;
-	left: 0px;
+#favorites_container{
 	height: 240px;
 	width: 960px;
-	padding: 0px;
 	padding-left: 25px;
 	margin: 0 auto;
 	text-align: left;
+	vertical-align: top;	
 }
 
-.fav_thumb{
-	width: 170px;
-	text-align: center;
-	height: 240px;
-	position: relative;
-	display: inline-table;
-	vertical-align: top;
-	margin-right: 15px;
+#list_of_favorites{
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+	padding-top: 0px;
 }
+
+/* Wrogn color cant see song and artist name
+#list_of_favorites .thumb_song_title{
+	color: white;
+}
+
+#list_of_favorites .thumb_artist_name{
+	color: white;
+	opacity: .6;
+}
+*/
+
+#list_of_favorites .thumb_source{	
+	position: absolute;
+	left: 1px;
+	top: 1px;
+	height: 170px;
+	width: 170px;
+	opacity: 0;
+}
+
+
+#list_of_favorites .thumb_source:hover {
+	opacity:.7;
+}
+
+/***************** Main Crate ********************/
 
 #crate_container{
 	position: relative;
@@ -422,7 +445,8 @@ button:active{
 	margin: 0px;
 	list-style: none;
 	overflow: hidden;
-	padding-top: 15px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 
 .thumbnail{
@@ -433,28 +457,56 @@ button:active{
 	display: inline-table;
 	vertical-align: top;
 	margin-right: 15px;
+	cursor: pointer;
+}
 
+.fa-trash{
+	position: absolute;
+	display: inline-block;
+	right: -6px;
+	top: -6px;
+	color: #c41116;
+	z-index: 2;
+}
+
+
+.thumb_source{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 170px;
+	width: 170px;
+	opacity: 0;
+}
+
+.thumb_source:hover {
+	opacity:.7;
 }
 
 .thumb_art{
 	height: 170px;
 	width: 170px;
+	border: 1px solid rgba(0,0,0,.05);
 }
 
 .thumb_song_title {
-	font-size: 14px;
+	font-size: 13px;
 	margin: 0px;
 	padding: 0px;
 	max-width: 170px;
 	overflow: hidden;
+	white-space: normal;
 	text-overflow: ellipsis;
 	display: -webkit-box;
+	display: -moz-box;
+  	display: -ms-flexbox;
   	-webkit-line-clamp: 2;
+  	-moz-box-line-clamp: 2;
   	-webkit-box-orient: vertical;
 }
 
 .thumb_artist_name{
-	font-size: 13px;
+	font-size: 12px;
 	margin: 0px;
 	padding:0px;
 	max-width: 170px;
@@ -467,27 +519,55 @@ button:active{
   	-webkit-box-orient: vertical;
 }
 
-.thumb_source{
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	height: 170px;
-	width: 170px;
-	opacity: 0;
+/***************** Current Rotation egde case ********************/
+
+#favorites_edge_case_container{
+	margin: 0 auto;
+	width: 600px;
+	position: relative;
+	left: -10px;
+	text-align: center;
 }
 
-.thumb_source:hover {
-	opacity:.6;
-}
-
-.fa-trash{
-	position: absolute;
+.edge_case_message{
+	position: relative;
+	text-align: center;
+	color: black;
+	font-weight: 400;
+	font-size: 13px;
+	max-width: 600px;
 	display: inline-block;
-	right: -6px;
-	top: -6px;
-	color: #c41116;
+}
+
+#edge_case_image{
+	position: relative;
+	margin: 0 auto
+}
+
+/***************** Crate egde case ********************/
+
+#crate_edge_case_container{
+	margin: 0 auto;
+	width: 600px;
+	text-align: center;
+	position: relative;
+	left: -10px;
 }
 
 
+#crate_edge_case_container .edge_case_message{
+	position: relative;
+	color: black;
+	text-align: center;
+	padding-top: 40px;
+	font-size: 14px;
+	opacity: .6;
+	display: block;
+	font-weight: 500;
+}
 
-
+#crate_edge_case_image{
+	position: relative;
+	opacity: .6;
+	padding-bottom: 60px;
+}

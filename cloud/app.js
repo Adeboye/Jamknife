@@ -23,15 +23,67 @@ app.locals.parseJavascriptkey = "o3eAz6C7ZVTmniwX4otiCOUoNlOlBVhILIW3y7Nw";
 app.locals.sessionId = "";
 
 app.get('/', function (req,res) {
+	
+	isCurrentUser(req, res, 'homepage', 'Welcome to Jamknife');
+	
+	/*
 	res.render('homepage', {
 		title: 'Welcome to Jamknife'
 	})
+	*/
 })
 
+var isCurrentUser = function (req,res, action, title) {
+	console.log("ISCURRENTUSER IS WORKING");
+	var user = Parse.User.current();
+	console.log(user);
+
+	if(Parse.User.current())
+	{
+		Parse.User.current().fetch().then(function (user) {
+				var username = user.get('username');
+				console.log(username);
+				res.redirect('/' + username);
+		},
+		function (error) {
+			console.log(error);	
+		});
+	}
+	else
+	{
+		res.render(action, {
+			title: title
+		});
+	}
+}
+
 app.get('/signup', function (req,res) {
-	res.render('registration',{
+	console.log("my prse query isnt working")
+	
+	var user = Parse.User.current();
+	console.log(user);
+	
+	isCurrentUser(req, res, 'registration', 'Jamknife Signup');
+	
+	/*
+	if(Parse.User.current())
+	{
+		Parse.User.current().fetch().then(function (user) {
+				var username = user.get('username');
+				console.log(username);
+				res.redirect('/' + username);
+		},
+		function (error) {
+			console.log(error);	
+		});
+	}
+	else
+	{
+		res.render('registration', {
 			title: 'Jamknife Signup'
-	});
+		});
+	}
+	*/
 });
 
 app.post('/signup', function(req,res) {
@@ -65,6 +117,7 @@ app.post('/signup', function(req,res) {
 				userinfo.set("bio", "");
 				userinfo.set("website", "");
 				userinfo.set("pageview", 0);
+				userinfo.set("favcount", 0);
 				userinfo.set("user", Parse.User.current());
 				//userinfo.set("user", user);
 				userinfo.save(null, {
@@ -89,25 +142,35 @@ app.post('/signup', function(req,res) {
 	});
 
     app.get('/login', function (req, res) { 
-    	console.log('i am so confuswed');
-    	var currentUser = Parse.User.current();
-		console.log(currentUser);
-         if (currentUser) {
-              // do stuff with the user
-              console.log('I am logging out');
-              Parse.User.logOut();
-        } 
-
-		res.render('login', {
-			title: 'Jamknife Login'
-		});
+		
+		isCurrentUser(req, res, 'login', 'Jamknife Login');
+		/*
+		if(Parse.User.current())
+		{
+			Parse.User.current().fetch().then(function (user) {
+					var username = user.get('username');
+					console.log(username);
+					res.redirect('/' + username);
+			},
+			function (error) {
+				console.log(error);	
+			});
+		}
+		else
+		{
+			res.render('login', {
+				title: 'Jamknife Login'
+			});
+		}
+		*/
 	})
 
-
+	
 	app.get('/authentication', function (req, res) {
 		res.render('authentication', {
 			title: 'Authentication Page'
 		})
+		
 	})
 
 	
@@ -133,14 +196,12 @@ app.post('/signup', function(req,res) {
 		//TO DO MAKE THIS AN UTILS FUNCTION (LOGOUT) - CLEAN CODE
 		console.log(req.session);
 		var currentUser = Parse.User.current();
-		Parse.User.logOut();
-         if (currentUser) {
-              console.log('I am logging out');
-              Parse.User.logOut();
-        } 
-		res.render('logout', {
-			title : 'Log out Page'
-		})
+		Parse.User.logOut().then(function () {
+			console.log("I am leaving logging out");
+			res.redirect('/signup');	
+		}, function (error) {
+			console.log("error page");
+		});
 	})
 	
 	app.get('/:user', function (req, res) {

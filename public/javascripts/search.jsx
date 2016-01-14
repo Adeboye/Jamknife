@@ -18,9 +18,9 @@ var soundcloudparams = {
 };
 
 var formaturl = function(params) {
-	console.log(params);
+	//console.log(params);
 	//params["term"] = text; //needs work add a "+"
-	console.log(params);
+	//console.log(params);
 	return "?" + Object
 			.keys(params)
 			.map(function (key) {
@@ -92,14 +92,14 @@ var makeCorsRequest = function makeCorsRequest(text, provider) {
 			var worker = new Worker(blobURL);
 			
 			worker.onmessage = function (e) {
-			    console.log("A message was received!!!!!!!!!!!!!!!!!");
-				console.log(e.data);
+			    //console.log("A message was received!!!!!!!!!!!!!!!!!");
+				//console.log(e.data);
 				resolve(e.data);
 				worker.terminate();
 			};
 			
 			worker.onerror = function (e) {
-			    console.log("was i called??????????????");
+			    //console.log("was i called??????????????");
 				reject(e.message);
 				worker.terminate();
 			};
@@ -119,7 +119,7 @@ var makeCorsRequest = function makeCorsRequest(text, provider) {
 			//xhr.setRequestHeader("Content-Type", "text/html");
 			
 			if (!xhr) {
-				console.log('CORS not supported');
+				//console.log('CORS not supported');
 				return;
 			}
 			
@@ -129,8 +129,8 @@ var makeCorsRequest = function makeCorsRequest(text, provider) {
 				
 				if(xhr.readyState == 4) {
 					status = xhr.status;
-					console.log(status);
-					console.log("i got the status");
+					//console.log(status);
+					//console.log("i got the status");
 					if(status == 200) {
 						//data = JSON.parse(xhr.responseText);
 						resolve(xhr.responseText);
@@ -143,15 +143,15 @@ var makeCorsRequest = function makeCorsRequest(text, provider) {
 			
 			// Response handlers.
 			xhr.onload = function() {
-				console.log("at least i worked");
+				//console.log("at least i worked");
 				//var response = xhr.responseText;
 				//var title = getTitle(text);
-				console.log('Response from CORS request to ' + url + ': ');
+				//console.log('Response from CORS request to ' + url + ': ');
 			};
 			
 			xhr.onerror = function() {
-				console.log('Woops, there was an error making the request.');
-				console.log(xhr.status);
+				//console.log('Woops, there was an error making the request.');
+				//console.log(xhr.status);
 				reject(Error("Network Error"));
 			};
 			
@@ -170,7 +170,7 @@ var SearchBar = React.createClass({
 	handleSearch: function (e) {
 	    e.preventDefault();
 		var text = React.findDOMNode(this.refs.sbox).value.trim();
-		console.log(text);
+		//console.log(text);
 		if(!text || 0 === text.length)
 		{
 			return;
@@ -180,13 +180,11 @@ var SearchBar = React.createClass({
 	},
 	
 	render: function () {
-	 console.log("Search bar was called");
+	 //console.log("Search bar was called");
 	  return(
 			<div id="search_box">
-					<form className="container-4"  autoComplete="off">
-						<input type="text" id="search" placeholder="Search for music..." ref="sbox"/>
-						<button className="icon" onClick={this.handleSearch}><img src="../public_folder/images/search.png"/></button>
-					</form>
+						<input type="text" id="search" placeholder="Search for music by song name, artist name or both..." ref="sbox"/>
+						<button className="icon" onClick={this.handleSearch}><img src="public_folder/images/Search/search.png"/></button>
 			</div>
 		)
 	}
@@ -195,8 +193,8 @@ var SearchBar = React.createClass({
 var SearchResults = React.createClass({
 	callPost: function (result, apisource, e) {
 		e.preventDefault();
-		console.log(e);
-		console.log(result);
+		//console.log(e);
+		//console.log(result);
 		result['apisource'] = apisource;
 		
 		
@@ -205,7 +203,7 @@ var SearchResults = React.createClass({
 			result['stream_url'] = result['stream_url'] + "?client_id=" + soundcloudparams['client_id'];
 			result['artwork_url_small'] = (result['artwork_url']).replace("-large", "-t200x200")
 			result['artwork_url_large'] = (result['artwork_url']).replace("-large", "-t500x500");
-			console.log(result['stream_url']);
+			//console.log(result['stream_url']);
 		}
 		if(apisource == "itunes")
 		{
@@ -219,20 +217,20 @@ var SearchResults = React.createClass({
 	},
 	
 	render: function () {
-		console.log("Search Results was called");
-		console.log(this.props.data);
-		console.log(this.props.data[1]);
-		console.log(this.props.data[0]);
+		//console.log("Search Results was called");
+		//console.log(this.props.data);
+		//console.log(this.props.data[1]);
+		//console.log(this.props.data[0]);
 		var searchList
 		if(this.props.data[1] === "itunes")
 		{
-		  console.log(this.props.data[0].results);
+		  //console.log(this.props.data[0].results);
 		  var that = this;
 		  searchList =  (this.props.data[0].results).map(function (sresult) {
 		  	  return (
 					<a key={sresult.trackName} className="songresults" onClick={that.callPost.bind(that, sresult, that.props.data[1])}>
 						<li id="results">
-							<img src={sresult.artworkUrl100}/>
+							<img src={sresult.artworkUrl100} className="album_art"/>
 							<div id="results_text">
 								<p className= "song_name">{(checkNested(sresult, 'trackName')) ? sresult.trackName : ""}</p>
 								<p className= "artist_name">{(checkNested(sresult, 'artistName')) ? sresult.artistName : "" }</p>
@@ -245,12 +243,12 @@ var SearchResults = React.createClass({
 		if(this.props.data[1] === "soundcloud")
 		{
 		  var that = this;
-		  console.log(this.props.data[0]);
+		  //console.log(this.props.data[0]);
 		  searchList = (this.props.data[0]).map(function (sresult) {
 		  	 return (
 			   	   <a key={sresult.title} className="songresults" onClick={that.callPost.bind(that, sresult, that.props.data[1])}>
 						<li id="results">
-								<img src={sresult.artwork_url}/>
+								<img src={sresult.artwork_url} className="album_art"/>
 								<div id="results_text">
 									<p className= "song_name">{(checkNested(sresult , 'title')) ? sresult.title : ""}</p>
 									<p className= "artist_name">{(sresult , 'user' , 'username') ? sresult.user.username : ""}</p>
@@ -279,16 +277,24 @@ var SearchBox = React.createClass({
 	
 	whichProvider: function (e) {
 	  this.providerProp = e.target.name;
-	  console.log(this.providerProp);
+	  //console.log(this.providerProp);
 	  if(this.providerProp == "soundcloud")
 	  {
-	  	e.target.style.background = '#ADD8E6';
-		this.refs.itunes.getDOMNode().style.background = "";
+	  	//e.target.style.background = '#ADD8E6';
+		//this.refs.itunes.getDOMNode().style.background = "";
+		e.target.style.borderBottom = "3px solid  #FF6600";
+		e.target.style.color = "#FF6600";
+		this.refs.itunes.getDOMNode().style.borderBottom = "";
+		this.refs.itunes.getDOMNode().style.color = "";
 	  }
 	  else
 	  {
-	  	e.target.style.background = '#ADD8E6';
-		this.refs.soundcloud.getDOMNode().style.background = "";  
+	  	//e.target.style.background = '#ADD8E6';
+		//this.refs.soundcloud.getDOMNode().style.background = "";  
+		e.target.style.borderBottom = "3px solid  #1d1d1d";
+		e.target.style.color = "#1d1d1d";
+		this.refs.soundcloud.getDOMNode().style.borderBottom = "";
+		this.refs.soundcloud.getDOMNode().style.color = "";
 	  }
 	},
 	
@@ -302,9 +308,8 @@ var SearchBox = React.createClass({
 			//var position = searchtext.indexOf('\s');
 			text = text.replace(/ /g, '+'); 
 		}
-		console.log("working up here");
 		//promise to pass results of JSON call back 
-		console.log(that.providerProp);
+		//console.log(that.providerProp);
 		makeCorsRequest(text, this.providerProp).then(function(val) {
 		    console.log("i am in the val function");
 			if(that.providerProp == "soundcloud") { 
@@ -316,7 +321,7 @@ var SearchBox = React.createClass({
 				return val;
 			}
 		}).then(function(result) {
-			console.log(result);
+			//console.log(result);
 			//that.setState({data: result});
 			that.setState({set: {data: result ,provider: that.providerProp}});
 			//that.setState({ set: {data: result}});
@@ -331,13 +336,10 @@ var SearchBox = React.createClass({
 			    <div id="search_console">
 					<div id="search_console_header">
 						<p id="search_console_label">Create</p>
-						<button type="button" id="cancel_search">
-							<span><img id="image_cancel" src="../public_folder/images/close.png"></img></span>
+						<button type="button" id="cancel_search_button">
+							<img id="image_cancel" src="public_folder/images/Search/close.png" />
 						</button>
 					</div>
-					<button type="button" id="cancela_search">
-							<span><img src="../public_folder/images/close.png"></img></span>
-				    </button>
 					<SearchBar onSearchSubmit={this.handleSearchSubmit}/>
 					<div id="search_filter">
 						<button id="soundcloud_button" name="soundcloud" onClick={this.whichProvider} ref="soundcloud">Soundcloud</button>
@@ -372,6 +374,7 @@ document.addEventListener("click", function (event) {
 
 var postmount = function () {
 	React.unmountComponentAtNode(document.getElementById('search_container'))
+	//document.getElementById('search_overlay').setAttribute('dsiplay', 'none')
 	React.render(
 		<Post_overlay result={search_result.postProp}/>,
 		document.getElementById('post_container')

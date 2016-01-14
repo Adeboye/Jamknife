@@ -1,5 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
-
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 body{
 	position: relative;
 	background: #fff;
@@ -10,7 +9,6 @@ body{
 	min-width: 900px;
 	overflow: hidden;
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 
 #post_overlay{
@@ -29,21 +27,20 @@ body{
 	position: relative;
 	height: 590px;
 	width: 900px;
+	z-index: 2;
+	background-color: #eeeceb;
 	margin:0 auto;
 	top: 50%;
 	transform: translateY(-50%);
 	overflow: hidden;
-	display: inline-block;
 	text-align: left;
-	border-radius: 6px;
 	background-color: #eeeceb;
-	z-index: 2;
 	overflow: hidden;
 	opacity: .97;
 
 }
 
-#console_header{
+#post_console_header{
 	position: absolute;
 	height: 39px;
 	width: 900px;
@@ -54,7 +51,7 @@ body{
 	z-index: 9;
 }
 
-#go_back{
+#post_go_back{
 	position: absolute;
 	top: 10px;
 	left: 20px;
@@ -65,7 +62,7 @@ body{
 }
 
 
-#cancel_post{
+#post_cancel_post{
 	position: absolute;
 	top: 10px;
 	right: 20px;
@@ -84,7 +81,7 @@ body{
 	text-transform: uppercase;
 }
 
-.album_cover{
+.post_album_cover{
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -94,7 +91,7 @@ body{
 	z-index: 900;
 }
 
-#overlay{
+#post_main_overlay{
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -106,7 +103,7 @@ body{
 	z-index: 901;
 }
 
-.post {
+.post_main {
 	position: relative;
 	top: 40px;
 	height: 550px;
@@ -116,7 +113,7 @@ body{
 	z-index: 5;
 }
 
-.pic{
+.post_pic{
 	position:absolute;
 	top: 35px;
 	left: 35px;
@@ -127,7 +124,7 @@ body{
 	z-index: 902;
 }
 
-.username{
+.post_username{
 	position:absolute;
 	top: 23px;
 	font-weight: 600;
@@ -140,7 +137,7 @@ body{
 	text-overflow: ellipsis;
 }
 
-.timestamp{
+.post_timestamp{
 	position:absolute;
 	top: 36px;
 	font-weight: 500;
@@ -161,7 +158,7 @@ body{
 	z-index: 902;
 }
 
-.artist_name{
+.post_artist_name{
 	position:absolute;
 	top: 480px;
 	letter-spacing: .03;
@@ -176,7 +173,7 @@ body{
 	text-overflow: ellipsis;
 }
 
-.song_name{
+.post_song_name{
 	position:absolute;
 	letter-spacing: .03em;
 	text-align: left;
@@ -193,7 +190,7 @@ body{
 }
 
 
-#caption_container{
+#post_caption_container{
 	position: relative;
 	text-align: center;
 	left: 36px;
@@ -206,7 +203,7 @@ body{
     transform: translateY(-50%);
 }
 
-.caption{
+.post_caption{
 	position: relative;
 	color: white;
 	letter-spacing:.05em;
@@ -242,14 +239,14 @@ body{
 }
 
 
-.play{
+.post_play_button{
 	position: absolute;
 	right: 36px;
 	top: 36px;
 	z-index: 903;
 }
 
-.video{
+.post_video_button{
 	position: absolute;
 	right: 100px;
 	top: 51px;
@@ -257,7 +254,7 @@ body{
 	opacity: .7;
 }
 
-#form_container{
+#post_form_container{
 	position: absolute;
 	display: inline-block;
 	top: 40px;
@@ -270,7 +267,7 @@ body{
 	padding: 0px;
 }
 
-textarea{
+textarea.bio{
 	position: relative;
 	font-family: Open Sans;
 	width: 318px;
@@ -287,7 +284,7 @@ textarea{
 	border-bottom: 1px solid rgba(255,255,255,1);
 }
 
-input{
+input.inputbox{
 	position: relative;
 	top: 4px;
 	left: -1px;

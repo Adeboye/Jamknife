@@ -1,12 +1,10 @@
-console.log(Parse.User.current());
-
 var user_query;
+var trashImg
+var test = "yooooooooooooo";
+var tmp;
+var bbbs = "ssssssssssssssss";
 
-var curr_user = Parse.User.current();
-//console.log(curr_user.getSessionToken());
-console.log(curr_user);
 
-var bob;
 
 var checkNested = function (obj) {
   var args = Array.prototype.slice.call(arguments, 1);
@@ -25,42 +23,85 @@ var getusername = function () {
 	return user_name[1].toLocaleLowerCase();
 }
 
-/*document.getElementById("logout").addEventListener("click", function(){
-    alert("i was clicled");
-	localStorage.clear();
-});*/
+var deleteAllCookies = function () {
+    var cookies = document.cookie.split(";");
 
+    for (var i = 0; i < cookies.length; i++) {
+    	var cookie = cookies[i];
+    	var eqPos = cookie.indexOf("=");
+    	var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    	document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+
+/*"void function" used to remove unwanted attribute on html fragment"*/
+var removeReactAttribute = function (list) {
+	var parent = list;
+	list = list.firstChild;
+	while(list != null)
+	{
+		list.removeAttribute("data-reactid");
+		console.log(list);
+		list = list.nextElementSibling;
+	}
+	/*
+	var newReplacehtml = '<img class="fa fa-trash" src="public_folder/images/Profile/trash.png"  click="this.deleteFavorites"/>';
+	var d = document.createElement('div');
+	d.innerHTML =  newReplacehtml;
+	var newReplace = d.firstChild;
+	console.log(newReplace);
+	var oldReplace = parent.getElementsByClassName("fa fa-trash")[0];
+	console.log(oldReplace);
+	parent.replaceChild(newReplace, oldReplace);
+	*/
+}
 
 Parse.Cloud.run("pageviews", {username: getusername()});
 
 
 $(document).on("click", "#logout", function(e) {
-	   localStorage.clear();
-	   Parse.User.current().logOut();
- });
+		//e.preventDefault();
+		localStorage.clear();
+	   	deleteAllCookies();
+		
+		/*
+	   Parse.User.logOut().then(function () {
+	   		console.log(Parse.User.current());
+			Parse.Cloud.run("logout").then(function () {
+				localStorage.clear();
+	   			deleteAllCookies();
+				window.location.href = "http://jamknife.parseapp.com/signup";   
+			}, function (error) {
+				console.log(error);
+			})  
+	   }, 
+	   function (error) {
+	   		console.log(error);
+			 console.log("Promise working");  
+	   });
+	   */
+});
 
 var getPathFromUrl = function (url) {
   return url.split("?")[1];
 }
 
-var babb;
-
 var Navigation = React.createClass({
 	render: function () {
-		console.log(this.props.user[0]);
+		//console.log(this.props.user[0]);
 		//console.log(babb);
 		if(Parse.User.current())
 		{
 			return(
 					<div id="header">
 						<div id="navigation">
-							<a href={"/" + this.props.user.username}><h5 id="font_logo">JAMKNIFE</h5></a>
-							<button id="postbutton" className="post_button" type="button">Add a new song</button>
-							<a href="/signup" ><p id="logout" className="log_button">LOG OUT</p></a>
-							<div id="user_nav">
-								<img className="avatar" src={this.props.user.photo? this.props.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"}/>
-								<p className="username">{this.props.user.username}</p>
+							<a href={"/" + this.props.curruser.username}><h5 id="text_logo">JAMKNIFE</h5></a>
+							<div id="nav_container">
+								<img className="avatar" src={this.props.curruser.photo? this.props.curruser.photo.url() : "public_folder/images/Profile/default_picture.png"} />
+								<p className="username">{this.props.curruser.username}</p>
 							</div>
+							<button id="postbutton" className="post_button" type="button">Add a new song</button>
+							<a href="/logout"><p id="logout" className="log_button">Log out</p></a>
 						</div>
 					</div>
 			)
@@ -70,7 +111,7 @@ var Navigation = React.createClass({
     		return(
 				<div id="header">
 					<div id="navigation">
-						<a href="/"><h5 id="font_logo">JAMKNIFE</h5></a>
+						<a href="/"><h5 id="text_logo">JAMKNIFE</h5></a>
 						<a href="/signup" ><p id="signup" className="log_button">SIGN UP</p></a>
 					</div>
 				</div>
@@ -79,83 +120,116 @@ var Navigation = React.createClass({
 	}
 })
 
-
 var Profile_section = React.createClass({
 
 	clickEditProfile: function (e) {
 		this.props.initEditProfile();
 	},
-
+	
 	render: function () {
 		if(Parse.User.current())
-		{
-			return(
-				<div id="profile_section">
-					<button id="edit_profile" type="button" onClick={this.clickEditProfile}>
-						<i id="cog" className="fa fa-cogs"></i>
-						<p id="p_edit_profile">EDIT PROFILE</p>
-					</button>
-					<div id="avatar_container">
-						<img className="avatar" src={this.props.user.photo? this.props.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';"/>
-					</div> 
-					<div id="profile_container">
-						<h2 className="username">{this.props.user.username}</h2>
-						<button id ="share_button">
-							<img src="public_folder/images/share.png"/>
-						</button>
-						<h2 className="full_name">{this.props.user.fullname}</h2>
-						<p className="bio">{this.props.user.bio}</p>
-						<a className="website" href={"http://" +this.props.user.website}>{this.props.user.website}</a>
-						<div id="counters">
-							<div id="views">
-								<i id="eye"className="fa fa-eye"></i>
-								<p id="views_label">VIEWS:</p>
-								<p className="no_of_views">{this.props.user.pageview}</p>
+		{		  
+			if(this.props.curruser.username == this.props.user.username)
+			{
+				return(
+					<div id="profile_section_container">
+						<div id="profile_section">
+							<button id="edit_profile_button" type="button" onClick={this.clickEditProfile}>
+								<i id="cog" className="fa fa-cogs"></i>
+								EDIT PROFILE
+							</button>
+							<img className="avatar" src={this.props.curruser.photo? this.props.curruser.photo.url() : "public_folder/images/Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Profile/default_picture.png';"/>
+							<div id="profile_info_container">
+								<h2 className="username">{this.props.curruser.username}</h2>
+								<button id ="share_button" alt="Share profile">
+									<img src="public_folder/images/Profile/share.png" alt="Share profile"/>
+								</button>
+								<p className="fullname">{this.props.curruser.fullname}</p>
+								<p className="bio">{this.props.curruser.bio}</p>
+								<a className="website" href={"http://" +this.props.curruser.website}>{this.props.curruser.website}</a>
+								<div id="counters_container">
+									<div id="views_counter_container">
+										<i id="eye" className="fa fa-eye"></i>
+										<p id="views_label">VIEWS:</p>
+										<p className="no_of_views">{this.props.curruser.pageview}</p>
+									</div>
+									<div id="crate_counter_container">
+										<i id="music_note" className="fa fa-music"></i>
+										<p id="crate_label">CRATE:</p>
+										<p className="no_of_songs">{this.props.curruser.postcount}</p>
+									</div>
+								</div>
 							</div>
-							<div id="crate">
-								<i id="box"className="fa fa-music"></i>
-								<p id="crate_label">CRATE:</p>
-								<p className="no_of_songs">415</p>
+						</div>
+					</div>
+				)
+			}
+			else
+			{
+				return(
+					<div id="profile_section_container">
+						<div id="profile_section">
+							<img className="avatar" src={this.props.user.photo? this.props.user.photo.url() : "public_folder/images/Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Profile/default_picture.png';"/>
+							<div id="profile_info_container">
+								<h2 className="username">{this.props.user.username}</h2>
+								<button id ="share_button" alt="Share profile">
+									<img src="public_folder/images/Profile/share.png" alt="Share profile"/>
+								</button>
+								<p className="fullname">{this.props.user.fullname}</p>
+								<p className="bio">{this.props.user.bio}</p>
+								<a className="website" href={"http://" +this.props.user.website}>{this.props.user.website}</a>
+								<div id="counters_container">
+									<div id="views_counter_container">
+										<i id="eye" className="fa fa-eye"></i>
+										<p id="views_label">VIEWS:</p>
+										<p className="no_of_views">{this.props.user.pageview}</p>
+									</div>
+									<div id="crate_counter_container">
+										<i id="music_note" className="fa fa-music"></i>
+										<p id="crate_label">CRATE:</p>
+										<p classNme="no_of_songs">{this.props.user.postcount}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				)
+			}
+		}
+		else
+		{
+			//console.log(this.props.user);
+			return(
+				<div id="profile_section_container">
+					<div id="profile_section">
+						<img className="avatar" src={this.props.user.photo? this.props.user.photo.url() : "public_folder/images/Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Profile/default_picture.png';"/>
+						<div id="profile_info_container">
+							<h2 className="username">{this.props.user.username}</h2>
+							<button id ="share_button" alt="Share profile">
+								<img src="public_folder/images/Profile/share.png" alt="Share profile"/>
+							</button>
+							<p className="fullname">{this.props.user.fullname}</p>
+							<p className="bio">{this.props.user.bio}</p>
+							<a className="website" href={"http://" +this.props.user.website}>{this.props.user.website}</a>
+							<div id="counters_container">
+								<div id="views_counter_container">
+									<i id="eye" className="fa fa-eye"></i>
+									<p id="views_label">VIEWS:</p>
+									<p className="no_of_views">{this.props.user.pageview}</p>
+								</div>
+								<div id="crate_counter_container">
+									<i id="music_note" className="fa fa-music"></i>
+									<p id="crate_label">CRATE:</p>
+									<p className="no_of_songs">{this.props.user.postcount}</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			)
 		}
-		else
-		{
-			console.log("OKAY PRINTED THE EDIT PROFILE AT LEAST");
-			console.log(this.props.user);
-			return(
-				<div id="profile_section">
-					<div id="avatar_container">
-						<img className="avatar" src={this.props.user.photo? this.props.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';"/>
-					</div>
-					<div id="profile_container">
-						<h className="username">{this.props.user.username}</h>
-						<h2 className="full_name">{this.props.user.fullname}</h2>
-						<p className="bio">{this.props.user.bio}</p>
-						<a className="website" href={"http://" + this.props.user.website}>{this.props.user.website}</a>
-						<div id="counters">
-							<div id="views">
-								<i id="eye"className="fa fa-eye"></i>
-								<p id="views_label">VIEWS:</p>
-								<p className="no_of_views">{this.props.user.pageview}</p>
-							</div>
-							<div id="crate">
-								<i id="box"className="fa fa-music"></i>
-								<p id="crate_label">CRATE:</p>
-								<p className="no_of_songs">415</p>
-							</div>
-						</div>
-					</div>	
-			    </div>
-			)
-		}
 	}
 });
-
-
 
 var Edit_profile = React.createClass({
 	mixins: [ParseReact.Mixin],
@@ -163,7 +237,7 @@ var Edit_profile = React.createClass({
 	observe: function () {
 		if(Parse.User.current())
 		{	
-			console.log('right one watch out for me');
+			//console.log('right one watch out for me');
 			return {
 				user: ParseReact.currentUser
 		    };
@@ -176,7 +250,7 @@ var Edit_profile = React.createClass({
 	},
 
 	handlePhotoUpload: function () {
-		console.log("I was callled by photo change");
+		//console.log("I was callled by photo change");
 		var reader = new FileReader();
 
 		reader.onload = function (e) {
@@ -184,53 +258,50 @@ var Edit_profile = React.createClass({
 		}
 
 		reader.readAsDataURL($("#imgupload")[0].files[0]);
-		console.log("done photo change");
+		//console.log("done photo change");
 	},
 	
 	showProfile: function() {
 		this.props.initProfile()
 	},
 	
-	saveProfile: function () {
+	saveProfile: function (e) {
+        e.preventDefault();
 		this.props.initSaveProfile();
 	},
 	
 	errorMessage: function (error) {
 		this.refs.errorreport.getDOMNode().value = error.message;
-		console.log(error.code);
+		//console.log(error.code);
 	},
-
+	
 	render: function () {
 		return(
-			<div id="edit_profile_section">
-				<button id="cnc_button" className="edit_profile" type="button" onClick={this.showProfile}>
-				 	<img id="cancel_button" src="public_folder/images/Edit Profile/cancel.png"/>
-				</button> 
-				<div id="avatar_container">
-					<input type="file" accept="image/*" id="imgupload" onChange={this.handlePhotoUpload} ref="imgupload" hidden/>
-					<button id="OpenImgUpload" onClick={this.handlePhotoClick}> 
-					<div id="avatar_overlay">
-						<i className="fa fa-camera fa-4x"></i>
+			<div id="profile_section_container">
+				<div id="edit_profile_section">
+					<button id="cancel_edit_profile_button" type="button" onClick={this.showProfile}>
+						<img src="public_folder/images/Edit Profile/cancel_edit.png"/>
+					</button>
+					<div id="edit_avatar_container">
+						<input type="file" accept="image/*" id="imgupload" onChange={this.handlePhotoUpload} ref="imgupload" hidden/>
+						<button id="OpenImgUpload" onClick={this.handlePhotoClick}>
+							<div id="edit_avatar_overlay">
+								<i className="fa fa-camera fa-3x" id="camera_icon"></i>
+							</div>
+							<img id="edit_avatar" className="edit_profile_avatar" src={this.props.user.photo? this.props.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';"/>
+						</button>
 					</div>
-					<img id="edit_avatar" className="edit_profile_avatar" src={this.props.user.photo? this.props.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} onerror="this.src = 'public_folder/images/Edit Profile/default_picture.png';" />	
-					</button>	
-			    </div>
-			    <div id="edit_profile_container">
-					<form id="form" action="">
-						<label id="username_icon"><img src="public_folder/images/Edit Profile/username.png" /></label>
-						<input id="username" type="text" name="username" placeholder="Username" maxLength="25" defaultValue={this.props.user.username} ref="username"/>
-						<label id="name_icon"><img src="public_folder/images/Edit Profile/name.png" /></label>
-						<input id="fullname"  type="text" name="fullname" placeholder="Full name" maxLength="25" defaultValue={this.props.user.fullname} ref="fullname"/>
+					<form action="" id="edit_profile_form">
+						<input id="username" type="text" id="a" name="username" placeholder="Username" maxLength="25" defaultValue={this.props.user.username} ref="username"/>
+						<input id="fullname"  type="text" name="fullname" placeholder="Full name" maxLength="25" defaultValue={this.props.user.fullname} ref="fullname" />
 						<br/>
-						<label id="bio_icon"><img src="public_folder/images/Edit Profile/bio.png" /></label>
-						<textarea name="bio" rows="6" cols="298" placeholder="Bio" maxLength="140" defaultValue={this.props.user.bio} ref="bio"></textarea>
+						<textarea name="bio" rows="6" cols="298" placeholder="Bio" maxLength="140"  defaultValue={this.props.user.bio} ref="bio"></textarea>
 						<br/>
-						<label id="web_icon"><img src="public_folder/images/Edit Profile/web.png" /></label>
-						<input type="Url" name="website" placeholder="Website" defaultValue={this.props.user.website} ref="website"/>
-						<input type="button" id="save_button" value="SAVE CHANGES" onClick={this.saveProfile}/>
-					</form>	
-					<p id="error_report_a" className="error_report" ref="errorreport"></p>
-			    </div>	
+						<input type="Url" type="text" name="website" placeholder="Website" defaultValue={this.props.user.website} ref="website" />
+						<input type="submit" value="SAVE CHANGES" onClick={this.saveProfile}/>
+						<p id="error_report_a" className="edit_profile_error_report"></p>
+					</form>		
+				</div>
 			</div>
 		)
 	}
@@ -250,13 +321,14 @@ var PostResults =  React.createClass({
 			//var User = Parse.Object.extend("UserInfo");
 			//var user_pointer = new User();
 			//user_pointer.id = this.props.user.objectId;
-			console.log(props);
+			//console.log(props);
 			return {
 				posts: (new Parse.Query("Post")
 						.equalTo("user", {
 								__type: "Pointer",
 								className: "UserInfo",
-								objectId: typeof(props.user) === 'object'? props.user.objectId : ""}))
+								objectId: typeof(props.user) === 'object'? props.user.objectId : ""})
+								.ascending("createdAt"))
 			}
 	},
 	
@@ -264,31 +336,99 @@ var PostResults =  React.createClass({
 		this.refreshQueries('posts');
 	},
 	
-	alerttileDisplay: function(postno) {
-		console.log(postno);
-		console.log("SELF WORKIGN AS EXPECTED")
-		console.log(this.props);
-		this.props.crateTileCallback(postno);
+	alerttileDisplay: function(objectId, postno) {
+		//console.log(postno);
+		//console.log("SELF WORKIGN AS EXPECTED")
+		//console.log(this.props);
+		this.props.crateTileCallback(objectId, postno);
+	},
+	
+	handleDragStart: function(e) {
+		console.log("I know i am working");
+		console.log(e.currentTarget);
+		//e.currentTarget.style.opacity = '0.4';
+		
+		e.dataTransfer.effectAllowed = 'copy';
+		console.log(e.currentTarget.innerHTML);
+		e.dataTransfer.setData('text/html', e.currentTarget.outerHTML);
+	},
+	
+	deletePost: function (e) {
+		console.log(e);
+	    e.preventDefault();
+	    console.log("i was clicked");
+		var parentLI = e.target.parentNode;
+		console.log(parentLI);
+		var parentname = parentLI.getAttribute("name");
+		console.log(parentname);
+		
+		/*
+		for(var i in this.state.saveFavorites)
+		{
+			if(this.state.saveFavorites[i] == parentname)
+			{
+				this.setState({
+					saveFavorites: this.state.saveFavorites.slice(i)
+				})
+				break;
+			}
+		}
+		*/
+		console.log(parentname);
+		console.log("***********************");
+		console.log(this.props.user.objectId);
+		Parse.Cloud.run("DeletePosts", {post: parentname, user: this.props.user.objectId}, {
+			
+			success: function () {
+				console.log("Deleted posts " + parentname);
+			},
+			error: function (error) {
+				console.log("error");
+			} 
+		})
+			
+		parentLI.parentNode.removeChild(parentLI); 
 	},
 	
 	render: function () {
-		console.log("at least i mounted")
+		console.log("is this the problem!!!!!!!!!!!!!!!!!!!!!!");
 		console.log(this.data.posts);
-		console.log(this.props.user);
+		//console.log(this.props.user);
+		var imgstyle = {
+			visibility: 'hidden'
+		};
+        var post_container
+        
+        if(this.data.posts.length > 0)
+        {
+            console.log("sssssssssssssssssss");
+            post_container =  (
+                    <div id="crate_container">
+                        <ol id="list_of_songs">
+                        {this.data.posts.map(function(post) {
+                            return (
+                                <li name={post.objectId} className="thumbnail drag-thumbnail" key={post.objectId} onDragStart={this.handleDragStart} onClick={this.alerttileDisplay.bind(this, post.objectId, post.postno)}>
+                                    <img className="fa fa-trash" style={imgstyle} src="public_folder/images/Profile/trash.png" ref="trash" onClick={this.deletePost}/>
+                                    <img className= "thumb_source" src={post.apisource === "soundcloud" ? "public_folder/images/Profile/soundcloud.png" : "public_folder/images/Profile/itunes.png"}/>
+                                    <img className="thumb_art" src={post.smallimage} />
+                                    <p className="thumb_song_title">{post.songname}</p>
+                                    <p className="thumb_artist_name">{post.artistname}</p>
+                                </li>	
+                            )
+                        }, this)}		
+                        </ol>
+                    </div>)
+        }
+        else
+        {
+            console.log("yeahssssssssss");
+            post_container = (function () {return <div id="crate_edge_case_container"><p className="edge_case_message">No posts yet</p><img src="public_folder/images/Profile/no_post.png" id="crate_edge_case_image" /></div>})()
+        }
+        console.log(post_container);
 		return(
-			<ol id="list_of_songs">
-			{this.data.posts.map(function(post) {
-				return (
-					<li name={post.objectId} className="thumbnail" key={post.postno} onClick={this.alerttileDisplay.bind(this, post.postno)}>
-						<i className="fa fa-trash fa-x"></i>
-						<img className= "thumb_source" src={post.apisource === "soundcloud" ? "public_folder/images/soundcloud.png" : "public_folder/images/itunes.png"}/>
-						<img className="thumb_art" src={post.smallimage}/>
-						<p className="thumb_song_title">{post.songname}</p>
-						<p className="thumb_artist_name">{post.artistname}</p>
-					</li>	
-				)
-			}, this)}		
-			</ol>
+            <div>
+			{post_container}
+            </div>
 		)
 	}
 })
@@ -298,7 +438,6 @@ var Tile = React.createClass({
 	mixins: [ParseReact.Mixin],
 	
 	getInitialState: function () {
-		console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 		return {
 			currPost: ""
 		}
@@ -315,10 +454,17 @@ var Tile = React.createClass({
 	},
 	
 	componentWillMount: function () {
-		console.log('Yo Yo');
-		console.log(this.data);
+		//console.log(this.data);
+		//console.log(this.data.posts);
+		//console.log(this.data.posts[0])
+		var objno = this.props.postclicked;
+		var clicked = this.data.posts.filter(function (post) {
+			console.log(post.objectId);
+			return post.objectId == objno;
+		})
+		//console.log(clicked);
 		this.setState({
-			currPost: checkNested(this.data.posts[0], 'apisource') ? this.data.posts[this.props.postno] : ""
+			currPost: checkNested(this.data.posts[0], 'apisource') ? clicked : ""
 		})	
 	},
 
@@ -358,7 +504,7 @@ var Tile = React.createClass({
 	
 	
 	render: function() {
-		console.log(this.state.currPost);
+		//console.log(this.state.currPost);
 		var tag_trim
 		if(this.state.currPost.tags)
 		{
@@ -376,27 +522,31 @@ var Tile = React.createClass({
 		}
 		return(
 			<div id="main_overlay">
-				<img id="close_big_tile" src="public_folder/images/Tile/close_medium.png" />
-				<div id="big_tile">
-					<img id="share_big_tile" src="public_folder/images/Tile/share_tile.png" />
-					<a role="button"><img id="scroll_left" src="public_folder/images/Tile/left.png" /></a>
-					<a role="button"><img id="scroll_right" src="public_folder/images/Tile/right.png" /></a>
-					<img id="play_big_tile" src="public_folder/images/Tile/play.png" alt="" />
-					<div id="caption_container_big_tile">
-						<p class="caption_big_tile">{this.state.currPost.bio}
+				<img id="close_lightbox" src="public_folder/images/Lightbox/close_lightbox.png" />
+				<div id="lightbox">
+					<p id="lightbox_timestamp"></p>
+					<div id="shareto_container">
+						<img id="shareto_facebook"src="public_folder/images/Lightbox/to_facebook.png" />
+						<img id="shareto_twitter" src="public_folder/images/Lightbox/to_twitter.png" />
+					</div>
+					<a role="button"><img id="scroll_left" src="public_folder/images/Lightbox/left.png" /></a>
+					<a role="button"><img id="scroll_right" src="public_folder/images/Lightbox/right.png" /></a>
+					<img id="play_lightbox" src="public_folder/images/Lightbox/play.png" alt="" />
+					<div id="lightbox_caption_container">
+						<p className="lightbox_caption">{this.state.currPost.bio}
 						</p>
-						<ul class="tags_big_tile">
+						<ul className="lightbox_tags">
 							{tag_trim}
 						</ul>
 					</div>
-					<div id="overlay_big_tile"></div>
-					<img class="album_cover_big_tile" src={this.state.currPost.largeimage} alt="" />
-					<img class="avatar_big_tile" src={this.props.user.photo ? this.props.user.photo.url() : "public_folder/images/Edit Profile/default_picture.png"} alt="" />
-					<p class="username_big_tile">{this.props.user.username}</p>
-					<img id="video_big_tile" src="public_folder/images/Tile/video.png" />
-					<img class="source_big_tile" src={this.state.currPost.apisource == "itunes" ? "public_folder/images/Post/itunes.png" : "public_folder/images/Post/soundcloud.png"} />
-					<p class="artist_name_big_tile">{this.state.currPost.artistname}</p>
-					<p class="song_name_big_tile">{this.state.currPost.songname}</p>
+					<div id="lightbox_overlay"></div>
+					<img className="lightbox_album_cover" src={this.state.currPost.largeimage} alt="" />
+					<img className="lightbox_avatar" src={this.props.user.photo ? this.props.user.photo.url() : "public_folder/images/Lightbox/default_picture.png"} alt="" />
+					<p className="lightbox_username">{this.props.user.username}</p>
+					<img id="lightbox_video_button" src="public_folder/images/Tile/video.png" />
+					<img className="lightbox_source" src={this.state.currPost.apisource == "itunes" ? "public_folder/images/Lightbox/itunes.png" : "public_folder/images/Lightbox/soundcloud.png"} />
+					<p className="lightbox_artist_name">{this.state.currPost.artistname}</p>
+					<p className="lightbox_song_name">{this.state.currPost.songname}</p>
 				</div>	
 			</div>
 		)
@@ -416,95 +566,300 @@ var updatecomponentsucceed = function () {
 var updatecomponentfail = function (error) {
 	usernametaken = true;
 	$("#error_report_a").html(error.message);
-	console.log(error.code);
+	//console.log(error.code);
 }
 
-/*var second_header = React.createClass({
-	render: function (argument) {
-		return(
-				<div id="container">
-					<i className="fa fa-star"></i>
-					<p className="fav_label">CURRENT ROTATION</p>
-					<ol className="favorites">
-						<li className="post">
-							<i className="fa fa-trash fa-x"></i>
-							<img className= "thumbnail" src="public_folder/images/album arts/dangelo.jpg" alt=""/>
-							<img className= "thumb_overlay" src="public_folder/images/itunes.png"/>
-							<p className="song_title">Betray My Heart is a good song to see</p>
-							<p className="artist_name">D'angelo and the Vanguard yeah right</p>
-						</li>
-					</ol>
-					<i className="fa fa-circle-o"></i>
-					<p className="all_songs_label">ALL SONGS</p>
-					<ol className="all_songs">
-						<li className="post">
-							<img className= "thumbnail" src="public_folder/images/album arts/dangelo.jpg" alt=""/>
-							<img className= "thumb_overlay" src="public_folder/images/soundcloud.png"/>
-							<p className="song_title">Betray My Heart is a good song to try and kill someone </p>
-							<p className="artist_name">D'angelo to try andokieifpto</p>
-						</li><li className="post">
-							<img className= "thumbnail" src="public_folder/images/album arts/dangelo.jpg" alt=""/>
-							<img className= "thumb_overlay" src="public_folder/images/soundcloud.png"/>
-							<p className="song_title">Betray My Heart</p>
-							<p className="artist_name">D'angelo</p>
-						</li><li className="post">
-							<img className= "thumbnail" src="public_folder/images/album arts/dangelo.jpg" alt=""/>
-							<img className= "thumb_overlay" src="public_folder/images/soundcloud.png"/>
-							<p className="song_title">Betray My Heart</p>
-							<p className="artist_name">D'angelo</p>
-						</li><li className="post">
-							<img className= "thumbnail" src="public_folder/images/album arts/dangelo.jpg" alt=""/>
-							<img className= "thumb_overlay" src="public_folder/images/soundcloud.png"/>
-							<p className="song_title">Betray My Heart</p>
-							<p className="artist_name">D'angelo</p>
-						</li><li className="post">
-							<img className= "thumbnail" src="public_folder/images/album arts/dangelo.jpg" alt=""/>
-							<img className= "thumb_overlay" src="public_folder/images/soundcloud.png"/>
-							<p className="song_title">Betray My Heart</p>
-							<p className="artist_name">D'angelo</p>
-						</li><li className="post">
-							<img className= "thumbnail" src="public_folder/images/album arts/dangelo.jpg" alt=""/>
-							<img className= "thumb_overlay" src="public_folder/images/soundcloud.png"/>
-							<p className="song_title">Betray My Heart</p>
-							<p className="artist_name">D'angelo</p>
-						</li>			
-					</ol>
-			</div>
-		)
-	}
-}); 
-
-
-
-React.render(
-			<second_header />,
-			document.getElementById('footerb')
-);*/
+var displayLightBox = function (objectId, postclicked, user) {
+	React.render(
+		<Lightbox objId={objectId} postclicked={postclicked} user={user}/>,
+		document.getElementById('lightbox_container')
+	);
+}
 
 
 var Crate = React.createClass({
+	mixins: [ParseReact.Mixin],
+	
+	getInitialState: function () {
+		return ({
+			showFavorites: false,
+			saveFavorites: [],
+			deleteFavorite_list: []
+		})
+	},
+	
+	observe: function (props, state) {
+			return {
+				favorites: (new Parse.Query("Post")
+							.equalTo("user", {
+									__type: "Pointer",
+									className: "UserInfo",
+									objectId: typeof(props.user) === 'object'? props.user.objectId : ""})
+							.equalTo("isFavorites", true))
+			}
+	},
+	
+	componentWillMount: function () {
+		console.log(this.data);
+		console.log(this.data.favorites);
+	},
+		
+	cratebutton: function () {
+		var imgs
+		var list
+	    if(document.getElementById("edit_crate_button").textContent == "EDIT CRATE")
+		{
+			console.log("This doesnt work firefox");
+			this.setState({
+				showFavorites: true
+			})
+			document.getElementById("edit_crate_button").textContent = "SAVE"
+			/*
+			imgs = document.getElementsByClassName("fa fa-trash");
+			Array.prototype.forEach.call(imgs, function (elem)  {
+			   elem.style.visibility = "visible";
+			   elem.setAttribute("draggable", true);
+			})
+			*/
+			
+			var list = document.getElementsByClassName("thumbnail");
+			Array.prototype.forEach.call(list, function (elem) {
+				if(elem.classList.contains("drag-thumbnail"))
+				{
+					elem.setAttribute("draggable", true);
+				}
+				elem.getElementsByClassName("fa fa-trash")[0].style.visibility = "visible";
+			})
+			
+		}
+		else if(document.getElementById("edit_crate_button").textContent == "SAVE")
+		{
+			this.setState({
+				showFavorites: false
+			})
+			
+			document.getElementById("edit_crate_button").textContent = "EDIT CRATE";
+			/*
+			imgs = document.getElementsByClassName("fa fa-trash");
+			Array.prototype.forEach.call(imgs, function (elem)  {
+			   elem.style.visibility = "hidden";
+			    elem.setAttribute("draggable", false);
+			})
+			*/
+			var list = document.getElementsByClassName("thumbnail");
+			Array.prototype.forEach.call(list, function (elem) {
+				if(elem.classList.contains("drag-thumbnail"))
+				{
+				elem.setAttribute("draggable", false);
+				}
+				elem.getElementsByClassName("fa fa-trash")[0].style.visibility = "hidden";
+			})
+			console.log(this.state.saveFavorites);
+			if(this.state.saveFavorites.length > 0)
+			{
+				Parse.Cloud.run("SaveFavorites", {favorites: this.state.saveFavorites,
+												user: this.props.user.objectId}, {							  
+					success: (function () {
+						console.log("success saved favorites");
+						this.setState({
+							saveFavorites: []
+						})
+						this.refreshQueries('favorites');
+						this.forceUpdate();
+					}).bind(this),
+					error: function (error) {
+						console.log(error);  //TODO Pipe this error back to log
+					}
+				})
+			}
+			
+			if(this.state.deleteFavorite_list.length > 0)
+			{
+				Parse.Cloud.run("DeleteFavorite", {delfavorites: this.state.deleteFavorite_list,
+												user: this.props.user.objectId}, {
+					success: (function () {
+						console.log("delete Favorites");
+						this.setState({
+							deleteFavorite_list: []
+						})
+						this.refreshQueries('favorites');
+						this.forceUpdate();
+					}).bind(this),
+					error: function (error) {
+						console.log(error);	//TODO Pipe this error back to log
+					}
+				})
+			}
+			
+			console.log(this.props.user.objectId);
+			console.log("cloud code should have ran");
+		}
+	},
+	
+	handleDragEnter: function (e) {
+		e.preventDefault();
+	},
+	
+	handleDrop: function (e) {
+		if (e.stopPropagation) {
+			e.stopPropagation(); // stops the browser from redirecting.
+		}
+		console.log(e.currentTarget);
+		var add = e.dataTransfer.getData('text/html');
+		var el = document.createElement('html');
+		el.innerHTML = add;
+		var oldLI = el.getElementsByTagName('li')[0];
+		removeReactAttribute(oldLI);
+		window.myspecialvar = this;
+		var idname = oldLI.getAttribute("name") + "_fav";
+		console.log(idname);
+		
+		/*
+		trashImg = oldLI.getElementsByClassName("fa fa-trash")[0];
+		
+		trashImg.id = "myxxx";
+		console.log(trashImg);
+		//trashImg.addEventListener("click", function (event) {alert("jsjjsjsj")}, false);
+		$(document).on("click", "#myxxx" , function (e) {
+			 e.preventDefault();
+			 alert("yeahh");
+			 window.myspecialvar.deleteFavorites(e);
+			console.log(e)
+		})
+
+		/*
+		var parent = oldLI
+		window.myspecialvar = this;
+		console.log(self.deleteFavorites);
+		var newReplacehtml = '<img class="fa fa-trash" src="public_folder/images/Profile/trash.png" onclick="alert(bbbs)"/>';
+		var d = document.createElement('div');
+		d.innerHTML =  newReplacehtml;
+		var newReplace = d.firstChild;
+		console.log(newReplace);
+		var oldReplace = parent.getElementsByClassName("fa fa-trash")[0];
+		console.log(oldReplace);
+		parent.replaceChild(newReplace, oldReplace);
+		*/
+		
+		//console.log(this.deleteFavorites());
+		//console.log(trashImg);
+		var innx = oldLI.innerHTML;
+		console.log(innx);
+		var newLI = document.createElement("li");
+		newLI.setAttribute("name", idname);
+		newLI.className = "thumbnail";
+		newLI.innerHTML = innx;
+		console.log(newLI);
+		var list_fav =  e.currentTarget.getElementsByTagName("OL")[0];
+		console.log(list_fav);
+		list_fav.appendChild(newLI);
+		
+		var testx = document.getElementsByName(idname)[0];
+		console.log(testx);
+		var sas = testx.getElementsByClassName("fa fa-trash")[0];
+		console.log(sas);
+		sas.addEventListener("click", this.deleteFavorites , false);
+		
+		
+		this.setState({
+			saveFavorites: this.state.saveFavorites.concat([idname])
+		});
+		
+		return false;
+	},
+	
+	handleDragOver: function (e) {
+		if (e.preventDefault) {
+			e.preventDefault(); // Necessary. Allows us to drop.
+		}
+		
+		e.dataTransfer.dropEffect = 'copy';  // See the section on the DataTransfer object.
+		
+		return false;
+	},
+	
+	handleDragEnd: function (e) {
+		if(e.preventDefault) 
+		{
+			e.preventDefault();
+		}
+		
+	},
+	
+	deleteFavorites: function (e) {
+		console.log(e);
+	    e.preventDefault();
+		console.log(e);
+	    console.log("i was clicked");
+		var parentLI = e.target.parentNode;
+		console.log(parentLI);
+		var parentname = parentLI.getAttribute("name");
+		console.log(parentname);
+		
+		/*
+		for(var i in this.state.saveFavorites)
+		{
+			if(this.state.saveFavorites[i] == parentname)
+			{
+				this.setState({
+					saveFavorites: this.state.saveFavorites.slice(i)
+				})
+				break;
+			}
+		}
+		*/
+		
+		this.setState({
+			saveFavorites: this.state.saveFavorites.filter(function (val) {
+				if(val != parentname) {
+					return val;
+				}
+			}),
+			deleteFavorite_list: this.state.deleteFavorite_list.concat(parentname)
+		})
+		parentLI.parentNode.removeChild(parentLI); 
+		//parentLI.innerHTML = "";
+	},
+
 	render: function () {
+		var imgstyle = {
+				visibility: 'hidden'
+		};
+	  console.log(this.data.favorites);
+	  
+	  var favoritelist
+	  favoritelist = this.data.favorites.map(function (results) {
+	  	return (
+		 	 <li name={results.objectId + "_fav"} className="thumbnail">
+						<img className="fa fa-trash" style={imgstyle} src="public_folder/images/Profile/trash.png" ref="trash" onClick={this.deleteFavorites}/>
+						<img className= "thumb_source" src={results.apisource === "soundcloud" ? "public_folder/images/Profile/soundcloud.png" : "public_folder/images/Profile/itunes.png"}/>
+						<img className="thumb_art" src={results.smallimage} />
+						<p className="thumb_song_title">{results.songname}</p>
+						<p className="thumb_artist_name">{results.artistname}</p>
+			</li>	
+		 )
+	  }, this)
+      
+	  // this.props.user.favcount > 0					  
+	  var favourites_container = this.data.favorites.length > 0 || this.state.showFavorites > 0  ? <div id="favorites_container" onDragEnter={this.handleDrageEnter} onDragLeave={this.handleDragLeave} onDrop={this.handleDrop} onDragOver={this.handleDragOver} onDragEnd={this.handleDragEnd}><ol id="list_of_favorites">{favoritelist}</ol></div> : <div id="favorites_edge_case_container"><p className="edge_case_message">You have 0 songs in your current rotation. Hit edit crate, and drag songs into this box to add them.</p><img src="public_folder/images/Profile/edge_collage.png" id="edge_case_image" /></div>	
+      				  
 		if(Parse.User.current())
 		{
 			return(
 				<div id="cratebox">
 					<div id="second_header">
 						<p id="second_header_label">CRATE</p>
-						<button id="edit_crate">EDIT CRATE</button>
+						<button id="edit_crate_button" onClick={this.cratebutton}>EDIT CRATE</button>
 					</div>
 					<div id="favorites">
-						<div id="fav_label_container">
+						<div id="favorites_label_container">
 							<i className="fa fa-star"></i>
 							<p className="fav_label">CURRENT ROTATION</p>
 						</div>
-						<ol id="list_of_favorites">
-						</ol>
+						{favourites_container}
 					</div>
-					<div id="crate_container">
-						<PostResults user={this.props.user} crateTileCallback={this.props.tileCallbackFn}/>
-					</div>
-				</div>
-					
+					 <PostResults user={this.props.user} crateTileCallback={this.props.tileCallbackFn} ref="inner"/>
+				</div>	
 			)
 		}
 		else
@@ -515,18 +870,14 @@ var Crate = React.createClass({
 						<p id="second_header_label">CRATE</p>
 					</div>
 					<div id="favorites">
-						<div id="fav_label_container">
+						<div id="favorites_label_container">
 							<i className="fa fa-star"></i>
 							<p className="fav_label">CURRENT ROTATION</p>
 						</div>
-						<ol id="list_of_favorites">
-						</ol>
+						{favourites_container}
 					</div>
-					<div id="crate_container">
-						<PostResults user={this.props.user} crateTileCallback={this.props.tileCallbackFn}/>
-					</div>
-				</div>
-					
+					<PostResults user={this.props.user} crateTileCallback={this.props.tileCallbackFn} ref="inner"/>
+				</div>	
 			)
 		}
 	}
@@ -537,10 +888,16 @@ var ParentBox = React.createClass({
 
 	observe: function () {
 		var user_window = (window.location.href).split(".com/");
-		console.log(user_window);
+		var currentUser = Parse.User.current() ? Parse.User.current().getUsername() : null;
+		//console.log(currentUser);
+		//console.log(user_window);
 			return {
 				user: (new Parse.Query("UserInfo")
-							.equalTo("username_lowercase", user_window[1].toLocaleLowerCase()))
+							.equalTo("username_lowercase", user_window[1].toLocaleLowerCase())),
+				
+				currentUser: currentUser ? (new Parse.Query("UserInfo")
+												.equalTo("username_lowercase", currentUser)) : (new Parse.Query("UserInfo")
+							.equalTo("username_lowercase", user_window[1].toLocaleLowerCase())) //important to change THIS QUICK FIX REMEMBER!!!!!			
 		    };
 	},
 	
@@ -565,7 +922,8 @@ var ParentBox = React.createClass({
 	},
 	
 	updatecomponentfail: function (error) {
-		console.log(error.message)
+		//console.log(error.message)
+        console.log(error);
 		React.findDOMNode(this.refs.inner.refs.errorreport).innerHTML = error.message;
 	},
 	
@@ -577,8 +935,8 @@ var ParentBox = React.createClass({
 		var website = this.refs.inner.refs.website.getDOMNode().value.trim();
 		var fileUploadControl = this.refs.inner.refs.imgupload.getDOMNode();
 		var self = this;
-		console.log(fileUploadControl);
-		console.log(fileUploadControl.files);
+		//console.log(fileUploadControl);
+		//console.log(fileUploadControl.files);
 		var flat_curr_user = (Parse.User.current()).toPlainObject();
 		if(fileUploadControl.files.length > 0)
 		{
@@ -589,7 +947,7 @@ var ParentBox = React.createClass({
 				username: username_lowercase,
 				username_nocase: username
 			}).dispatch().then(function  () {
-				console.log("User was saved successfully");
+				//console.log("User was saved successfully");
 				photo.save().then(function () {
 					ParseReact.Mutation.Set(self.data.user[0], {
 						username: username,
@@ -599,13 +957,13 @@ var ParentBox = React.createClass({
 						website: website,
 						photo: photo
 					}).dispatch().then(function  () {
-						console.log("Photo was saved successfully");
+						//console.log("Photo was saved successfully");
 						self.removeEditProfile();
 					}, function (error) {
 						self.updatecomponentfail(error);
 					});
 				}, function (error){
-					console.log('photo wasnt saved successfully');
+					//console.log('photo wasnt saved successfully');
 					self.updatecomponentfail(error);
 				})	
 			}, function (error) {
@@ -618,7 +976,7 @@ var ParentBox = React.createClass({
 				username: username_lowercase,
 				username_nocase: username
 			}).dispatch().then(function  () {
-				console.log("user was saved successfully");
+				//console.log("user was saved successfully");
 				ParseReact.Mutation.Set(self.data.user[0], {
 					username: username,
 					username_lowercase: username_lowercase,
@@ -627,7 +985,7 @@ var ParentBox = React.createClass({
 					website: website
 				}).dispatch().then(function  () {
 					self.removeEditProfile();
-					console.log("Profile was saved successfully");
+					//console.log("Profile was saved successfully");
 				}, function (error) {
 					self.updatecomponentfail(error);
 				});
@@ -637,29 +995,33 @@ var ParentBox = React.createClass({
 		}
 	},
 	
-	tileDisplay: function(val) {
-		console.log("Finally in last callback");
-		console.log(val);
+	tileDisplay: function(objectId, postno) {
+		//console.log(objectId);
+		//console.log(postno);
+		/*
 		this.setState({
-			postnoClicked: val,
+			postObjClicked: val,
 			showTile: true
 		})
+		*/
+		displayLightBox(objectId, postno, this.data.user[0]);
 	},
 	
 	render: function () {
+		//console.log(this.data.curruentUser);
 		if(Parse.User.current())
 		{
-			var profile = this.state.showProfile ? <Profile_section user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""} initEditProfile={this.removeProfile} initSaveProfileChange={this.saveProfileChange} /> :
+			var profile = this.state.showProfile ? <Profile_section curruser={checkNested(this.data.currentUser[0], 'username') ? this.data.currentUser[0] : ""} user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""} initEditProfile={this.removeProfile} initSaveProfileChange={this.saveProfileChange} /> :
 																		<Edit_profile user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""} initSaveProfile={this.saveProfileChange} initProfile={this.removeEditProfile} ref="inner"/>;
-			var tile = this.state.showTile? <Tile postno={this.state.postnoClicked} user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""}/> : ""															
+			//var tile = this.state.showTile? <Tile postclicked={this.state.postObjClicked} user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""}/> : ""															
 				return(
 					<div id ="container">
-						<Navigation user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""}/>
+						<Navigation curruser={checkNested(this.data.currentUser[0], 'username') ? this.data.currentUser[0] : ""} user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""}/>
 						<div id="midcontent" ref="midcontent_profile_ref">
 							{profile}
 						</div>
 						<Crate user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""} tileCallbackFn={this.tileDisplay}/>
-						<div id="tile">{tile}</div>
+						{/*<div id="tile">{tile}</div>*/}
 					</div>
 				)
 		}
@@ -673,7 +1035,7 @@ var ParentBox = React.createClass({
 							{profile}
 						</div>
 						<Crate user={checkNested(this.data.user[0], 'username') ? this.data.user[0] : ""} tileCallbackFn={this.tileDisplay}/>
-						<div id="tile">{tile}</div>
+						{/*<div id="tile">{tile}</div>*/}
 					</div>
 				)
 		}

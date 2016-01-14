@@ -1,14 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
-body{
-	position: relative;
+
+body {
 	background: #fff;
 	font-family: Open Sans, helvetica, Arial;
 	margin:0px;
 	padding: 0px;
-	width:auto;
-	min-width: 900px;
-	overflow: hidden;
-	-webkit-font-smoothing: antialiased;
 }
 
 #post_overlay{
@@ -17,38 +13,36 @@ body{
 	width:100%;
 	margin:0px;
 	padding: 0px;
-	background-color:rgba(0,0,0,.9); 
+	background-color:rgba(230,230,230,.95); 
 	z-index: 999999999;
 	text-align: center;
-	overflow: scroll;
+	/*overflow: scroll;   //removed the scroll breaking the page */
 }
+
+/***************** Post Console ********************/
 
 #post_console{
 	position: relative;
 	height: 590px;
-	width: 900px;
+	width: 980px;
 	z-index: 2;
-	background-color: #eeeceb;
 	margin:0 auto;
 	top: 50%;
 	transform: translateY(-50%);
 	overflow: hidden;
 	text-align: left;
-	background-color: #eeeceb;
 	overflow: hidden;
-	opacity: .97;
-
 }
 
 #post_console_header{
-	position: absolute;
-	height: 39px;
-	width: 900px;
-	border-bottom: 1px solid rgba(0,0,0,.1);
-	background-color: #eeeceb;
-	display: inline-block; 
+	height: 40px;
 	text-align: center;
-	z-index: 9;
+}
+
+#post_console_header_label{
+	color: white;
+	font-weight: 600;
+	font-size: 13px;
 }
 
 #post_go_back{
@@ -56,32 +50,140 @@ body{
 	top: 10px;
 	left: 20px;
 	display: inline-block;
-	position:absolute;
-	background-color: #eeeceb;
 	border: none;
+	background: none;
+	cursor: pointer;
 }
 
-
-#post_cancel_post{
+#cancel_post{
 	position: absolute;
 	top: 10px;
 	right: 20px;
-	display: inline-block;
-	position:absolute;
-	background-color: #eeeceb;
 	border: none;
+	background: none;
+	cursor: pointer;
 }
 
-#post_label{
+
+/***************** Change Image ********************/
+
+#change_post_bg{
+	position: absolute;
+	top:40px;
+	height: 550px;
+	width: 80px;
+	border: none;
+	background-color:#1a1a1a;
+	z-index: 5;
+	cursor:pointer;
+}
+
+
+#change_post_bg:hover{
+	background-color: #1e1e1e;
+}
+
+
+#post_camera_icon{
+	position: absolute;
+	display: inline-block;
+	margin: 0 auto;
+	color: white;
+	z-index: 9999;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/***************** lightbox ********************/
+
+#post_console #post_lightbox{
+	position: absolute;
+	top: 40px;
+	left: 80px;
+	margin: 0px;
+	padding: 0px;
+	height: 550px;
+	width: 550px;
+}
+
+
+#post_console #play_lightbox{
+	position: absolute;
+	right: 36px;
+	top: 36px;
+	z-index: 903;
+	cursor:pointer;
+}
+
+
+#post_console #lightbox_caption_container{
 	position: relative;
-	font-size: 13px;
-	color: rgba(0,0,0,0.7);
-	top: 0px;
-	font-weight: 600;
-	text-transform: uppercase;
+	text-align: center;
+	left: 36px;
+	right: 36px;
+  	width: 478px;
+  	max-height: 360px;
+  	height: auto;
+	z-index: 902;
+	top: 49%;
+    transform: translateY(-49%);
 }
 
-.post_album_cover{
+
+#post_console #post_lightbox .lightbox_caption{
+	position: relative;
+	color: white;
+	letter-spacing:.05em;
+	font-size: 16px;
+	font-weight: 300;
+	font-style: oblique;
+}
+
+
+#post_console #post_lightbox .lightbox_tags{
+	position: relative;
+	color: white;
+	letter-spacing:.05em;
+	font-size: 12px;
+	font-weight: 200;
+	left: 0px;
+	padding: 0px;
+}
+
+
+#post_console #post_lightbox .lightbox_tags li {
+	position: relative;
+	display: inline-table;
+	border: 1px solid white;
+	border-radius: 25px;
+	padding: 4px 10px 4px 10px;
+	margin: 7px 5px 0px 0px;
+	text-transform: capitalize; 
+}
+
+
+#post_console #post_lightbox .lightbox_tags li:hover {
+	background-color:#fff;
+	color:black;
+	border-style: none;
+}
+
+
+#post_console #lightbox_overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 550px;
+	width: 550px;
+	background-color: black;
+	opacity: .75;
+	display: inline-block;
+	z-index: 901;
+}
+
+
+#post_console .lightbox_album_cover{
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -91,29 +193,8 @@ body{
 	z-index: 900;
 }
 
-#post_main_overlay{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	height: 550px;
-	width: 550px;
-	background-color: black;
-	opacity: .7;
-	display: inline-block;
-	z-index: 901;
-}
 
-.post_main {
-	position: relative;
-	top: 40px;
-	height: 550px;
-	width: 550px;
-	display: inline-block;
-	text-align: center;
-	z-index: 5;
-}
-
-.post_pic{
+#post_console .lightbox_avatar{
 	position:absolute;
 	top: 35px;
 	left: 35px;
@@ -124,11 +205,12 @@ body{
 	z-index: 902;
 }
 
-.post_username{
+
+#post_console .lightbox_username{
 	position:absolute;
-	top: 23px;
-	font-weight: 600;
-	font-size: 20px;
+	top: 16px;
+	font-weight: 700;
+	font-size: 24px;
 	color: white;
 	left: 105px;
 	z-index: 902;
@@ -137,137 +219,82 @@ body{
 	text-overflow: ellipsis;
 }
 
-.post_timestamp{
+
+#post_console #lightbox_video_button{
 	position:absolute;
-	top: 36px;
-	font-weight: 500;
-	font-size: 13px;
+	top: 53px;
 	color: white;
 	right: 105px;
-	height: 60px;
-	width: 60px;
-	border-radius: 100%;
-	opacity: .8;
 	z-index: 902;
+	cursor:pointer;
 }
 
-.post_source{
+
+#post_console .lightbox_source{
 	position:absolute;
 	top: 73px;
 	left: 105px;
 	z-index: 902;
 }
 
-.post_artist_name{
+
+#post_console .lightbox_artist_name{
 	position:absolute;
 	top: 480px;
 	letter-spacing: .03;
-	font-weight: 200;
-	font-size: 16px;
-	color: white;
+	font-weight: 600;
+	font-size: 18px;
 	left: 36px;
-	max-width:478px; 
+	width:478px; 
 	z-index: 902;
 	text-align: left;
+	color: #51b8d7;
 	overflow: hidden;
-	text-overflow: ellipsis;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 
-.post_song_name{
+
+#post_console .lightbox_song_name{
 	position:absolute;
 	letter-spacing: .03em;
 	text-align: left;
 	top: 450px;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 20px;
-	color: #51b8d7;
-	max-width:478px;
-	-webkit-filter: brightness(120%);
+	width:478px;
 	left: 36px;
+	z-index: 902;
+	color: white;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	z-index: 902;
+	white-space: nowrap;
 }
 
 
-#post_caption_container{
-	position: relative;
-	text-align: center;
-	left: 36px;
-	right: 36px;
-  	width: 478px;
-  	max-height: 360px;
-  	height: auto;
-	z-index: 902;
-	top: 50%;
-    transform: translateY(-50%);
-}
 
-.post_caption{
-	position: relative;
-	color: white;
-	letter-spacing:.05em;
-	font-size: 16px;
-	font-weight: 200;
-	font-style: oblique;
-}
-
-.post_tags{
-	position: relative;
-	color: white;
-	letter-spacing:.05em;
-	font-size: 12px;
-	font-weight: 200;
-	left: 0px;
-	padding: 0px;
-}
-
-.post_tags li {
-	position: relative;
-	display: inline-table;
-	border: 1px solid white;
-	border-radius: 25px;
-	padding: 4px 10px 4px 10px;
-	margin: 7px 5px 0px 0px;
-	text-transform: capitalize; 
-}
-
-.post_tags li:hover {
-	background-color:#fff;
-	color:black;
-	border-style: none;
-}
-
-
-.post_play_button{
-	position: absolute;
-	right: 36px;
-	top: 36px;
-	z-index: 903;
-}
-
-.post_video_button{
-	position: absolute;
-	right: 100px;
-	top: 51px;
-	z-index: 903;
-	opacity: .7;
-}
+/***************** Form ********************/
 
 #post_form_container{
 	position: absolute;
 	display: inline-block;
 	top: 40px;
 	right: 0px;
-	height: 548px;
+	height: 550px;
 	width: 349px;
 	max-width: 349px;
 	overflow: hidden;
 	margin: 0px;
 	padding: 0px;
+	background-color: white;
 }
 
-textarea.bio{
+
+#post_form_container form{
+	padding-top: 15px;
+}
+
+#post_form_container textarea{
 	position: relative;
 	font-family: Open Sans;
 	width: 318px;
@@ -281,12 +308,14 @@ textarea.bio{
 	border:none;
 	outline: none;
 	resize:none;
-	border-bottom: 1px solid rgba(255,255,255,1);
+	border-bottom: 1px solid rgba(0,0,0,.08);
+	border-top: 1px solid rgba(0,0,0,.08);
 }
 
-input.inputbox{
+
+#post_form_container input{
 	position: relative;
-	top: 4px;
+	top: 6px;
 	left: -1px;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -297,11 +326,12 @@ input.inputbox{
 	padding-right:15px;
 	outline: none;
 	border: 1px solid rgba(0,0,0,.1);
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 }
 
-input[type="submit"]{
-	margin-top: 25px;
+
+#post_form_container input[type="submit"]{
+	margin-top: -3px;
 	left: 0px;
 	font-weight: 600;
 	font-size: 11px;
@@ -313,13 +343,14 @@ input[type="submit"]{
 	outline: none;
 	border: 1px solid rgba(0,0,0,.08); 
 	color: rgba(0,0,0,.7);
-	background-color: #f1efea;
+	background-color: #fff;
+	cursor:pointer;
 }
 
-label{
+
+#post_form_container label{
 	font-size: 13px;
 	padding-left: 15px;
 	font-style: italic;
 	opacity: .7;
-
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="profile.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+	<header id="header">
+		<div id="navigation">
+			<a href="jamknife.com"><h5 id="text_logo">JAMKNIFE</h5></a>
+			<div id="nav_container">
+				<img class="avatar" src="default_picture.png">
+				<p class="username">demi.adeniyi</p>
+			</div>
+			<button id="post_button" type="button">Add a new song</button>
+			<p class="log_button">Log out</p>
+		</div>
+	</header>
+	<div id="profile_section_container">
+		<div id="profile_section">
+		<!-- Replaced section  below-->
+			<button id="cancel_edit_profile_button" type="button">
+			 	<img src="cancel_edit.png"/>
+			</button>
+			<button id="edit_avatar_container">
+				<img class="edit_avatar" src="default_picture.png"/>
+				<div id="edit_avatar_overlay"></div>
+				<i class="fa fa-camera fa-3x" id="camera_icon"></i>
+			</button>
+			<form action="" id="edit_profile_form">
+				<input id="username" type="text" id="a" name="username" placeholder="Username" maxlength="25">
+				<input id="fullname"  type="text" name="fullname" placeholder="Full name" maxlength="25">
+				<br>
+				<textarea name="bio" rows="6" cols "298" placeholder="Bio" maxlength="140"></textarea>
+				<br>
+				<input type="Url" name="website" placeholder="Website">
+				<input type="submit" value="SAVE CHANGES">
+				<p class="edit_profile_error_report">That username is already taken</p>
+			</form>	
+		<!-- Replaced section  Ends-->	
+		</div>
+	</div>
+	<div id="second_header">
+		<p id="second_header_label">CRATE</p>
+		<button id="edit_crate_button">EDIT CRATE</button>
+	</div>
+	<div id="favorites">
+		<div id="favorites_label_container">
+				<i class="fa fa-star"></i>
+				<p class="fav_label">CURRENT ROTATION</p>
+		</div>
+		<div id="favorites_container">
+			<ol id="list_of_favorites">
+				<li id="thumbnail">
+					<img class="fa fa-trash" src="cancel.png"></i>
+					<img class= "thumb_source" src="itunes.png">
+					<img class="thumb_art" src="thumb.jpg">
+					<p class="thumb_song_title">2014 Forrest Hills Drive Is a longer title but if i try something a little longer</p>
+					<p class="thumb_artist_name">J. Cole </p>
+				</li>
+				<li id="thumbnail">
+					<img class="fa fa-trash" src="cancel.png"></i>
+					<img class= "thumb_source" src="itunes.png">
+					<img class="thumb_art" src="thumb.jpg">
+					<p class="thumb_song_title">2014 Forrest Hills Drive Is a longer title but if i try something a little longer</p>
+					<p class="thumb_artist_name">J. Cole </p>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div id="crate_container">
+		<ol id="list_of_songs">
+			<li id="thumbnail">
+				<img class="fa fa-trash" src="trash.png"></i>
+				<img class= "thumb_source" src="itunes.png">
+				<img class="thumb_art" src="thumb.jpg">
+				<p class="thumb_song_title">2014 Forrest Hills Drive Is a longer title but if i try something a little longer</p>
+				<p class="thumb_artist_name">J. Cole </p>
+			</li>
+			<li id="thumbnail">
+				<img class="fa fa-trash" src="trash.png"></i>
+				<img class= "thumb_source" src="soundcloud.png">
+				<img class="thumb_art" src="thumb.jpg">
+				<p class="thumb_song_title">2014 Forrest Hills Drive Is a longer title but if i try something a little longer</p>
+				<p class="thumb_artist_name">J. Cole </p>
+			</li>
+		</ol>
+	</div>
+</body>
+</html>

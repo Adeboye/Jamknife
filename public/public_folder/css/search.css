@@ -1,14 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
-body{
-	position: relative;
+
+body {
 	background: #fff;
 	font-family: Open Sans, helvetica, Arial;
 	margin:0px;
 	padding: 0px;
-	width:auto;
-	min-width: 900px;
-	overflow: hidden;
-	-webkit-font-smoothing: antialiased;
 }
 
 #search_overlay{
@@ -17,35 +13,37 @@ body{
 	width:100%;
 	margin:0px;
 	padding: 0px;
-	background-color:rgba(0,0,0,.8); 
+	background-color:rgba(230,230,230,.95); 
 	z-index: 999999999;
 	text-align: center;
-	overflow: scroll;
+	/*overflow: scroll;   //removed the scroll breaking the page */
 }
+
+
+/***************** Main Search Console ********************/
+
+/***************** Search header ********************/
 
 #search_console{
 	position: relative;
 	height: 600px;
 	width: 700px;
-	z-index: 9999999999;
+	z-index: 2;
 	background-color: white;
 	margin:0 auto;
 	top: 50%;
 	transform: translateY(-50%);
-	border-radius: 6px;
 	overflow: hidden;
-	border: 1px solid rgba(0,0,0,.2);
 	display: inline-block;
-	opacity: .97;
+
 }
 
 #search_console_header{
-	position: absolute;
-	height: 40px;
+	position: relative;   /*fix to make it clickable it was absolute before */
+	height: 30px;         /* chnged this to 30 from 40 px to move align button with CREATE text and reduce height*/
 	width: 700px;
-	border-bottom: 1px solid rgba(0,0,0,.1);
-	background-color: #f4f2f1;
-	opacity: 10;
+	border-bottom: 1px solid rgba(0,0,0,.08);
+	background-color: #ffffff;
 }
 
 #search_console_label{
@@ -57,30 +55,34 @@ body{
 	text-transform: uppercase;
 }
 
-#cancel_search{
+#cancel_search_button{
 	position: absolute;
-	top: 12px;
+	top: 1px;    /* changed this to 1px to align button with create text was 12px*/
 	right: 20px;
 	display: inline-block;
 	position:absolute;
-	background-color: #f4f2f1;
+	background-color: #fff;
 	border: none;
+	cursor: pointer;
 }
 
-.container-4{
+/***************** Search Box ********************/
+
+
+#search_box{
   position: relative;
   overflow: hidden;
   width: 700px;
   vertical-align: middle;
   white-space: nowrap;
-  padding-top: 41px;
-   margin:0px;
+ /* padding-top: 41px;   removed this to make searc_console_header clicable with relative positioning removes the padign */
+  margin:0px;
   border-bottom:1px solid rgba(0,0,0,.08);
 
 }
 
-.container-4 input#search{
-  width: 550px;
+#search_box input#search{
+  width: 600px;
   border: none;
   height: 60px;
   background: #fff;
@@ -88,14 +90,14 @@ body{
   font-weight: 400;
   float: left;
   color: rgba(0,0,0,.7);
-  padding-left: 90px;
+  padding-left: 20px;
   padding-bottom:0px;
   padding-top:0px;
   margin:0px;
   outline: none;
 }
 
-.container-4 input#search::-webkit-input-placeholder {
+#search_box input#search::-webkit-input-placeholder {
    color: rgba(0,0,0,.4);
    font-style: oblique;
    font-weight: 200;
@@ -103,7 +105,7 @@ body{
    font-size: 11pt;
 }
  
-.container-4 input#search:-moz-placeholder { /* Firefox 18- */
+#search_box input#search:-moz-placeholder { /* Firefox 18- */
    color: rgba(0,0,0,.4);
    font-style: oblique; 
    font-weight: 200;
@@ -111,7 +113,7 @@ body{
    font-size: 11pt;
 }
  
-.container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
+#search_box input#search::-moz-placeholder {  /* Firefox 19+ */
   color: rgba(0,0,0,.4);
    font-style: oblique;
    font-weight: 200;
@@ -119,7 +121,7 @@ body{
    font-size: 11pt; 
 }
  
-.container-4 input#search:-ms-input-placeholder {  
+#search_box input#search:-ms-input-placeholder {  
    color: rgba(0,0,0,.4);
    font-style: oblique;
    font-weight: 200;
@@ -127,7 +129,7 @@ body{
    font-size: 14pt; 
 }
 
-.container-4 button.icon{
+#search_box button.icon{
   -webkit-border-top-right-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
   -moz-border-radius-topright: 5px;
@@ -147,17 +149,20 @@ body{
   -ms-transition: all .55s ease;
   -o-transition: all .55s ease;
   transition: all .55s ease;
+  cursor: pointer;
 }
 
-.container-4:hover button.icon, .container-4:active button.icon, .container-4:focus button.icon{
+#search_box:hover button.icon, #search_box:active button.icon, #search:focus button.icon{
   outline: none;
   opacity: .9;
-  margin-left: -30px;
+  margin-left: -20px;
 }
  
 .container-4:hover button.icon:hover{
   background: white;
 }
+
+/***************** Search filter ********************/
 
 
 #search_filter{
@@ -168,31 +173,35 @@ body{
 	margin:0px;
 	padding:0px;
 	background-color: rgba(255,255,255,.9);
+	text-align: left;
 }
 
+#search_filter button:focus {outline:0;}
 
 #soundcloud_button{
 	position: relative;
 	display:inline-block; 
 	height: 50px;
-	width: 49%;
+	width: 350px;
 	margin:0px;
 	padding:0px;
 	vertical-align: top;
 	font-size: 12px;
 	background-color: rgba(255,255,255,.9);
 	border: none;
-	border-right:1px solid rgba(0,0,0,.1);
 	color:rgba(0,0,0,.4);
 	font-weight: 500;
+	border-bottom: 3px solid rgba(255,255,255,0);
+	border-right: 1px solid rgba(0,0,0,.02);
+	cursor: pointer;
 }
 
 #itunes_button{
 	vertical-align: top;
-	position: relative;
+	position: absolute;
 	display:inline-block; 
 	height: 50px;
-	width: 49%;
+	width: 350px;
 	margin:0px;
 	padding:0px;
 	font-size: 12px;
@@ -200,41 +209,58 @@ body{
 	background-color: white;
 	border: none;
 	font-weight: 500;
+	border-bottom: 3px solid;
+	border-bottom: 3px solid rgba(255,255,255,0); 
+	cursor: pointer; 
 }
+
+#soundcloud_button:hover{
+	border-bottom: 3px solid  #FF6600;
+	color:   #FF6600;
+}
+
+#itunes_button:hover{
+	border-bottom: 3px solid  #1d1d1d;
+	color:  #1d1d1d;
+}
+
+/***************** Search results ********************/
 
 
 #results_container{
 	position: relative;
 	display: inline-block;
-	height: 442px;
+	height: 448px;
 	width: 700px;
 	margin: 0, auto;
 	margin: 0px;
 	padding: 0px;
 	text-align: center;
 	overflow: scroll;
-	cursor: pointer;
 }
 
 #results{
 	position: relative;
 	display: inline-block;
 	padding-left: 20px;
+	padding-right: 20px;
 	padding-top: 11px;
 	padding-bottom: 6px;
 	list-style: none;
 	height: 60px;
-	width: 530px;
-	border-bottom: 1px solid rgba(0,0,0,.08);
+	width: 660px;
+	border-bottom: 1px solid rgba(0,0,0,.1);
 	text-align: left;
 	margin: 0px;
+	cursor: pointer;
 }
 
 #results:hover{
-	background-color: rgba(0,0,0,.03);
+	background-color: rgba(255,102,0,.8);
+	color: rgba(255,255,255,1);
 }
 
-#results_container img {
+#results_container .album_art {
 	height: 55px;
 	width: 55px;
 	border: 1px solid rgba(0,0,0,.04)
@@ -247,21 +273,41 @@ body{
 	display: inline-block;
 	left: 10px;
 	height: 50px;
-	width: 350px;
+	width: 550px;
 }
 
-.song_name{
+#results_text .song_name{
 	font-weight: 600;
-	font-size: 10pt;
+	font-size: 14px;
 	padding: 0px;
 	margin: 0px;
-	opacity: .9;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-.artist_name{
+#results_text .artist_name{
 	font-weight: 500;
-	font-size: 9pt;
+	font-size: 13px;
 	padding: 0px;
 	margin: 0px;
-	opacity: .6;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+/***************** No search results ********************/
+
+.search_edge_icon{
+	position: relative;
+	padding-top: 100px;
+	opacity: .7;
+}
+
+.search_edge_text{
+	position: relative;
+	padding-top: 10px;
+	margin: 0px;
+	color: rgba(0,0,0,.8);
 }

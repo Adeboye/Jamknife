@@ -25,28 +25,7 @@ Parse.Cloud.define("pageviews", function (request, response) {
 	 var currentUserID;
 	 var query = new Parse.Query('UserInfo');
 	 query.equalTo("username_lowercase", request.params.username);
-	 /*query.find().then(function (results) {
-	 	if(Parse.User.current())
-		{
-			currentUserID = Parse.User.current().id;
-		}
-		else
-		{
-			currentUserID = null;
-		}
-		var resultsID = results[0].id;
-		console.log(currentUserID);
-		console.log(resultsID);
-	 	if(currentUserID != resultsID)
-	 	{
-	 		var pagecount = results[0].attributes.pageview + 1;
-			console.log(pagecount);
-	 		return results[0].save({pageview : pagecount});
-	 	}
-	 }).then(function (result) {
-	 	console.log("The object was fucking saved");
-	 	console.log(results);
-	 })*/
+	
 	query.find({
 		success: function (results) {
 			Parse.Cloud.useMasterKey();
@@ -118,13 +97,16 @@ Parse.Cloud.define("CreatePost", function(request, response) {
 				post.set("apisource", request.params.apisource);
 				post.set("largeimage", request.params.largeimage);
 				post.set("smallimage", request.params.smallimage);
+				post.set("playbackurl", request.params.playbackurl);
+				post.set("isFavorites", false);
 				var postno = user[0].get("postcount") + 1;
 				post.set("postno", postno);
 				post.set("user", user[0]);
 				post.save(null, {
 					success: function() {
 						console.log('New Post created with objectId ' + post.id);
-						user[0].set("postcount", postno);
+						//user[0].set("postcount", postno);
+						user[0].increment("postcount");
 						user[0].save({
 							success: function () {
 								console.log("incremented post count");
@@ -149,7 +131,175 @@ Parse.Cloud.define("CreatePost", function(request, response) {
 		})
 }) 
 
+Parse.Cloud.define("SaveFavorites", function (request, response) {
+	//Parse.Cloud.useMasterKey();
+	console.log("cloud code savefvorites was ran");
+	var query = new Parse.Query("Post");
+	query.equalTo("user", {
+							__type: "Pointer",
+							className: "UserInfo",
+							objectId: request.params.user});				
+	var fav_array = request.params.favorites.map(function (elem) {
+		var val = elem.split('_');
+		return val[0];
+	})		
+	console.log(fav_array);	
+	console.log("I know whats happening tell me");			
+	query.containedIn("objectId", fav_array);						
+	query.find({
+		success: function (results) {
+			for(var i in results)
+			{
+				console.log(results[i]);
+				results[i].set("isFavorites", true);
+			} 
+			Parse.Object.saveAll(results, {
+				success: function(lists) {
+					console.log(lists);
+					console.log("All the favorites were saved");
+					var query2 = new Parse.Query("UserInfo");
+					query2.equalTo("objectId", request.params.user);
+					query2.find({
+						success: function (user) {
+							user[0].increment("favcount", results.length);	
+							user[0].save({
+								success: function () {
+									console.log("Updated favorite count");
+									response.success();
+								},
+								error: function (error) {
+									console.log("error saving favorite count");
+									response.error(error);
+								}
+							})
+						},
+						error: function (error) {
+							console.log("error finding the user when looking for fav");
+							response.error(error);
+						}
+					})
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			})
+		},
+		error: function () {
+			console.log("failed to find users with posts")
+			response.error("Failed to find posts with createBy");
+		}
+	})
+})
 
-//["_serverData","_opSetQueue","attributes","_hashedJSON","_escapedAttributes","cid","changed","_silent","_pending","_hasData","_previousAttributes","id","createdAt","updatedAt"]
+Parse.Cloud.define("DeleteFavorite", function (request, response) {
+	var query = new Parse.Query("Post");
+	query.equalTo("user", {
+							__type: "Pointer",
+							className: "UserInfo",
+							objectId: request.params.user});
+	var delete_Favorite_array = request.params.delfavorites.map(function (elem) {
+		var val = elem.split('_');
+		return val[0];
+	});
+	query.containedIn("objectId", delete_Favorite_array);
+	query.find({
+		success: function (results) {
+			for(var i in results)
+			{
+				console.log(results[i]);
+				results[i].set("isFavorites", false);
+			} 
+			Parse.Object.saveAll(results, {
+				success: function () {
+					var query2 = new Parse.Query("UserInfo");
+					query2.equalTo("objectId", request.params.user);
+					query2.find({
+						success: function (user) {
+							user[0].increment("favcount", -(results.length));
+							user[0].save({
+								success: function () {
+									console.log("decremented favorite count");
+									response.success();
+								},
+								error: function (error) {
+									console.log("error decrementing favorite count");
+									response.error(error);
+								}
+							})
+						},
+						error: function (error) {
+							console.log("error finding the user when looking for fav");
+							response.error(error);
+						}
+					})
+				},
+				error: function (error) {
+					console.log("error saving the results set to false");
+					response.error(error);
+				}
+			})
+		},
+		error: function (error) {
+			console.log("failed to find posts that were slated for deletion");
+			response.error(error);
+		}
+	})
+}) 
 
-//{"email":"jibola_27@yahoo.com","emailVerified":false,"username":"boye","username_nocase":"Boye","objectId":"6YcHrGuK6P","createdAt":"2015-11-10T05:02:46.899Z","updatedAt":"2015-11-10T05:08:18.376Z"}
+Parse.Cloud.define("DeletePosts", function (request, response) {
+	var query = new Parse.Query("Post");
+	query.equalTo("user", {
+							__type: "Pointer",
+							className: "UserInfo",
+							objectId: request.params.user});
+	console.log(request.params.post);						
+	query.equalTo("objectId", request.params.post);	
+	query.find({
+		success: function (result) {
+			console.log(result[0])
+			result[0].destroy({
+				success: function () {
+					console.log("Successfull deleted Post" + request.params.post);
+					var query2 = new Parse.Query("UserInfo");
+					query2.equalTo("objectId", request.params.user);
+					query2.find({
+						success: function (user) {
+							user[0].increment("postcount", -1);
+							user[0].save({
+								success: function () {
+									console.log("decremented postcount successfully");
+									response.success();
+								},
+								error: function (error) {
+									console.log("Error decrementing the postcount");
+									response.error(error);
+								}
+							})
+						},
+						error: function (error) {
+							console.log("Error finding user");
+							response.error(error);
+						}
+					})
+					
+				},
+				error: function (error) {
+					console.log("There was an error deleting the post");
+					response.error(error);
+				}
+			})
+		},
+		error: function (error) {
+			console.log("unable to find post to be deleted");
+			response.error(error);
+		}
+	})					
+})
+
+
+Parse.Cloud.define("logout", function (request, response) {
+	console.log(Parse.User.current());
+	//Parse.User.logout();
+	response.success();
+})
+
